@@ -1,6 +1,7 @@
 import dataclasses
 import json
 import sqlite3
+from itertools import groupby
 from typing import TypedDict
 
 import flask
@@ -32,7 +33,23 @@ class BeerStyle(TypedDict):
         return {**row, "examples": json.loads(row["examples"])}
 
 
+class MyBeer(TypedDict):
+    id: int
+    url: str
+    name: str
+    style: str
+    brewery: str
+    rating: float
+    abv: float
+    ibu: float
+    img: str
+    review: str
+    style_id: int
+
+
 app = flask.Flask(__name__)
+
+q = Q(sqlite_conn_or_cursor=sqlite3.connect("beer.db", check_same_thread=False))
 
 
 @app.route("/")
@@ -42,13 +59,20 @@ def index_route():
 
 @app.route("/styles")
 def styles_route():
-    q = Q(sqlite_conn_or_cursor=sqlite3.connect("beer.db", check_same_thread=False))
+
     styles = q.select_all("select * from beer_styles", as_=BeerStyle.from_row)
 
     return flask.render_template(
         "styles.html",
         styles=styles,
     )
+
+
+@app.route("/my-beers")
+def my_beers_route():
+    beers = q.select_all("select * from beer_my_untappd_beers order by style", as_=MyBeer)
+    beers_by_style = groupby(beers, key=lambda beer: beer["style"])
+    return flask.render_template("my_beers.html", beers_by_style=beers_by_style)
 
 
 if __name__ == "__main__":

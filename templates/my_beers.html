@@ -1,0 +1,20 @@
+{% extends "_layout.html" %}
+
+{% set title = "My Beers" %}
+
+{% block content %}
+
+<h1>My Beers</h1>
+
+{% for style, beers in beers_by_style %}
+    <h2>{{ style }}</h2>
+    <ul>
+        {% for beer in beers %}
+            <li>
+                <a href="{{ beer.url }}">{{ beer.brewery }} — {{ beer.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+
+{% endblock %}
