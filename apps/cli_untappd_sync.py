@@ -1,12 +1,16 @@
 import json
+import pathlib
+import sqlite3
 from collections import defaultdict
 
-from potyk_io_back.core.config import BASE_DIR
-from potyk_io_back.core.services import sql
+from b3.q import Q
+
+BASE_DIR = pathlib.Path(__file__).parent.parent
 
 
 def main(beer_history_path, checkins_path):
-    q = sql()
+    q = Q(sqlite_conn_or_cursor=sqlite3.connect(BASE_DIR / "beer.db", check_same_thread=False))
+
 
     with open(beer_history_path, "r", encoding="utf-8") as f:
         beer_history = json.load(f)
@@ -17,13 +21,13 @@ def main(beer_history_path, checkins_path):
     for checkin in checkins:
         checkins_by_url[checkin["url"]].append(checkin["comment"])
 
-    with q.commit_after():
-        for hist in beer_history:
-            q.execute(
-                "insert into beer_my_untappd_beers (url, name, style, brewery, rating, abv, ibu, img, review) values  (?,?,?,?,?,?,?,?,?)",
-                [hist[key] for key in ("url", "name", "style", "brewery", "rating", "abv", "ibu", "img")]
-                + ["\n\n".join(checkins_by_url[hist["url"]])],
-            )
+    for hist in beer_history:
+        q.execute(
+            "insert into beer_my_untappd_beers (url, name, style, brewery, rating, abv, ibu, img, review) values  (?,?,?,?,?,?,?,?,?)",
+            [hist[key] for key in ("url", "name", "style", "brewery", "rating", "abv", "ibu", "img")]
+            + ["\n\n".join(checkins_by_url[hist["url"]])],
+            commit=True,
+        )
 
 
 if __name__ == "__main__":

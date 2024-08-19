@@ -70,9 +70,25 @@ def styles_route():
 
 @app.route("/my-beers")
 def my_beers_route():
-    beers = q.select_all("select * from beer_my_untappd_beers order by style", as_=MyBeer)
+    beers = q.select_all(
+        "select * from beer_my_untappd_beers order by style, rating desc", as_=MyBeer
+    )
     beers_by_style = groupby(beers, key=lambda beer: beer["style"])
-    return flask.render_template("my_beers.html", beers_by_style=beers_by_style)
+    beers_by_style = [(style, list(beers)) for style, beers in beers_by_style]
+    beers_by_style = sorted(beers_by_style, key=lambda beer: len(beer[1]), reverse=True)
+
+    beers_by_brewery = groupby(
+        sorted(beers, key=lambda beer: (beer["brewery"], -beer["rating"])),
+        key=lambda beer: beer["brewery"],
+    )
+    beers_by_brewery = [(brewery, list(beers)) for brewery, beers in beers_by_brewery]
+    beers_by_brewery = sorted(beers_by_brewery, key=lambda beer: len(beer[1]), reverse=True)
+
+    return flask.render_template(
+        "my_beers.html",
+        beers_by_style=beers_by_style,
+        beers_by_brewery=beers_by_brewery,
+    )
 
 
 if __name__ == "__main__":

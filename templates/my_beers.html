@@ -4,17 +4,45 @@
 
 {% block content %}
 
-<h1>My Beers</h1>
+    <h1>My Beers</h1>
 
-{% for style, beers in beers_by_style %}
-    <h2>{{ style }}</h2>
-    <ul>
-        {% for beer in beers %}
-            <li>
-                <a href="{{ beer.url }}">{{ beer.brewery }} — {{ beer.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-{% endfor %}
+    {# 2 columns #}
+    <div style="display: flex; gap: 20px">
+        <div>
+            <h2>Styles</h2>
+            {% for style, beers in beers_by_style %}
+                <details>
+                    <summary><h3 style="display: inline-block">{{ style }} ({{ beers|length }})</h3>
+                    </summary>
+                    <ol>
+                        {% for beer in beers %}
+                            <li style="padding: 4px 0">
+                                <a href="{{ beer.url }}">{{ beer.brewery }} — {{ beer.name }}</a> ({{ beer.rating }})
+                            </li>
+                        {% endfor %}
+                    </ol>
+
+                </details>
+            {% endfor %}
+        </div>
+        <div>
+            <h2>Breweries</h2>
+            {% for brewery, beers in beers_by_brewery %}
+                <details>
+                <summary><h3 style="display: inline-block">{{ brewery }} ({{ beers|length }})</h3></summary>
+                <ol>
+                    {% for beer in beers %}
+                        <li style="padding: 4px 0">
+                            <a href="{{ beer.url }}">{{ beer.brewery }} — {{ beer.name }}</a> ({{ beer.rating }})
+                        </li>
+                    {% endfor %}
+                </ol>
+                </details>
+
+            {% endfor %}
+        </div>
+
+    </div>
+
 
 {% endblock %}
