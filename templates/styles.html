@@ -1,0 +1,41 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+
+
+    <h1>Styles</h1>
+
+    {% for style in styles %}
+        <div style="display: flex; align-items: center; gap: 20px">
+            <div>
+                <img src="{{ style.img }}" style="width: 200px">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px">
+                <div style="display: flex; flex-direction: column; gap: 2px">
+                    <h3 style="margin-bottom: 0">{{ style.name }}</h3>
+                    <div>{{ style.name_en }}</div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 2px">
+                    <div><b>Описание:</b> {{ style.description }}</div>
+                    <div><b>Аромат:</b> {{ style.aroma }}</div>
+                    <div><b>Вкус:</b> {{ style.taste }}</div>
+                    <div><b>Текстура:</b> {{ style.texture }}</div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 2px">
+                    <div><b>Алко</b>: {{ style.alco }}</div>
+                    <div><b>BJCP</b>: <a href="{{ style.bjcp_link }}">{{ style.bjcp_name }}</a></div>
+                    <div><b>Примеры:</b>
+                        {% for example in style.examples %}
+                            <a href="{{ example.untappd_link }}">{{ example.name }}</a>
+                            {% if not loop.last %}•{% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    {% endfor %}
+
+{% endblock %}
