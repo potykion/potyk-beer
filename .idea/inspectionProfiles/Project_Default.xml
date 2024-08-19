@@ -1,0 +1,57 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="DuplicatedCode" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="7">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="approval-attachments-modal" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="PyCompatibilityInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ourVersions">
+        <value>
+          <list size="1">
+            <item index="0" class="java.lang.String" itemvalue="3.11" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="16">
+            <item index="0" class="java.lang.String" itemvalue="PyNaCl" />
+            <item index="1" class="java.lang.String" itemvalue="psycopg2-binary" />
+            <item index="2" class="java.lang.String" itemvalue="lxml" />
+            <item index="3" class="java.lang.String" itemvalue="reportlab" />
+            <item index="4" class="java.lang.String" itemvalue="typing-extensions" />
+            <item index="5" class="java.lang.String" itemvalue="prometheus-client" />
+            <item index="6" class="java.lang.String" itemvalue="pytest-celery" />
+            <item index="7" class="java.lang.String" itemvalue="pytest-django-queries" />
+            <item index="8" class="java.lang.String" itemvalue="djangorestframework-types" />
+            <item index="9" class="java.lang.String" itemvalue="pylint_django" />
+            <item index="10" class="java.lang.String" itemvalue="django-types" />
+            <item index="11" class="java.lang.String" itemvalue="bandit" />
+            <item index="12" class="java.lang.String" itemvalue="pylint" />
+            <item index="13" class="java.lang.String" itemvalue="pylint-django" />
+            <item index="14" class="java.lang.String" itemvalue="darglint" />
+            <item index="15" class="java.lang.String" itemvalue="celery-redbeat" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="SqlNoDataSourceInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+  </profile>
+</component>
