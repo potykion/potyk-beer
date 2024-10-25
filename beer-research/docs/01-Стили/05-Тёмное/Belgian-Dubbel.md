@@ -1,57 +1,38 @@
----
-country: Belgium
-color: Медный
-alco: 6-8
-bjcp: https://www.bjcp.org/style/2021/26/26B/belgian-dubbel/
-tags:
----
-# Belgian-Dubbel
+# Бельгийский Дуббель / Belgian Dubbel aka Bruin
 
-# Описание 
+<a href="https://www.pintsandpanels.com/www.pintsandpanels.com/beer-style-simple-belgian-dubbel">
+<figure markdown="span">
+![belgiandubbel.jpg](belgiandubbel.jpg)
+<figcaption><small>https://www.pintsandpanels.com/www.pintsandpanels.com/beer-style-simple-belgian-dubbel</small></figcaption>
+</figure>
+</a>
 
+## Описание
 
+Крепковатый темный бельгийский эль с нотками хлеба, карамели и сухофруктов
 
-# Профиль
+## Профиль
 
-%% Характерные теги вкусового профиля  %%
+| Хар-ка    | Спектр                                                     |
+|-----------|------------------------------------------------------------|
+| Цвет      | Медный - Темный                                            |
+| Запах     | Цветочки-травка • Хлебно-тостовый • Карамель, жжёный сахар |
+| Вкус      | Квас • Ржаной Хлеб • Орехи • Изюм • Чернослив • Шоколад    |
+| Плотность | Средняя - Высокая                                          |
+| Алко      | 6-8                                                        |
 
-## Запах
+## Примеры
 
-- Цветочки-травка 
-- Хлебно-тостовый
-- Карамель, жжёный сахар 
+<a href="https://untappd.com//b/brouwerij-st-bernardus-prior-8/475">
+<figure markdown="span">
+![st-bernardus-prior-8.webp](st-bernardus-prior-8.webp){width="50"}
+<figcaption>St.Bernardus - Prior 8</figcaption>
+</figure>
+</a>
 
-## Вкус
+## Материалы
 
-- Квас
-- Ржаной Хлеб
-- Орехи
-- Чернослив 
-- Шоколад 
-
-
-### Спектр
-
-| Характеристика | Минималка | Среднее | Максималка |
-| -------------- | --------- | ------- | ---------- |
-| **Кислота**    |           |         |            |
-| Примеры        |           |         |            |
-
-
-
-## Плотность / Текстура 
-
-- 
-
-
-# Вариации
-
-- 
-
-# Примеры
-
-```dataview
-List 
-From [[]]
-```
-
+- [BJCP: 26B. Belgian Dubbel](https://www.bjcp.org/style/2021/26/26B/belgian-dubbel/)
+- https://profibeer.ru/styles/bjcp/amber-ale/belgian-dubbel/
+- [https://ru.wikipedia.org/wiki/Дуббель_(пиво)](https://ru.wikipedia.org/wiki/%D0%94%D1%83%D0%B1%D0%B1%D0%B5%D0%BB%D1%8C_(%D0%BF%D0%B8%D0%B2%D0%BE))
+- https://wyeastlab.com/style/belgian-dubbel/

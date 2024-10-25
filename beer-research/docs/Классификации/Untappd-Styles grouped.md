@@ -2,48 +2,49 @@
 
 # редкое 
   
-Australian Sparkling Ale  
-Brett Beer  
-Bière de Champagne / Bière Brut  
-Dark Ale  
-Flavored Malt Beverage  
-Gluten-Free  
-Grodziskie / Grätzer  
-Happoshu    
-Makgeolli  
-Malt Beer  
-Malt Liquor  
-Mild - Dark  
-Mild - Light  
-Mild - Other  
-Sorghum / Millet Beer  
-Specialty Grain  
-Table Beer  
-Traditional Ale  
+- [ ] Australian Sparkling Ale  
+- [ ] Brett Beer  
+- [ ] Bière de Champagne / Bière Brut  
+- [ ] Dark Ale  
+- [ ] Flavored Malt Beverage  
+- [ ] Gluten-Free  
+- [ ] Grodziskie / Grätzer  
+- [ ] Happoshu    
+- [ ] Makgeolli  
+- [ ] Malt Beer  
+- [ ] Malt Liquor  
+- [ ] Mild - Dark  
+- [ ] Mild - Light  
+- [ ] Mild - Other  
+- [ ] Sorghum / Millet Beer  
+- [ ] Specialty Grain  
+- [ ] Table Beer  
+- [ ] Traditional Ale  
 
 ## historical 
 
-Historical Beer - Adambier  
-Historical Beer - Berliner Braunbier  
-Historical Beer - Broyhan  
-Historical Beer - Burton Ale  
-Historical Beer - Dampfbier  
-Historical Beer - Gruit / Ancient Herbed Ale  
-Historical Beer - Kentucky Common  
-Historical Beer - Kottbusser  
-Historical Beer - Kuit / Kuyt / Koyt  
-Historical Beer - Lichtenhainer  
-Historical Beer - Mumme  
-Historical Beer - Other  
-Historical Beer - Steinbier  
-Historical Beer - Zoigl  
+- [ ] Historical Beer - Adambier  
+- [ ] Historical Beer - Berliner Braunbier  
+- [ ] Historical Beer - Broyhan  
+- [ ] Historical Beer - Burton Ale  
+- [ ] Historical Beer - Dampfbier  
+- [ ] Historical Beer - Gruit / Ancient Herbed Ale  
+- [ ] Historical Beer - Kentucky Common  
+- [ ] Historical Beer - Kottbusser  
+- [ ] Historical Beer - Kuit / Kuyt / Koyt  
+- [ ] Historical Beer - Lichtenhainer  
+- [ ] Historical Beer - Mumme  
+- [ ] Historical Beer - Other  
+- [ ] Historical Beer - Steinbier  
+- [ ] Historical Beer - Zoigl  
 
 # strong special 
 
 Freeze-Distilled Beer
 Rye Wine  
 Old / Stock Ale  
-Wheat Beer - Wheat Wine  
+Wheat Beer - Wheat Wine
+
 ## strong ale 
 
 Strong Ale - American  
@@ -60,7 +61,8 @@ Barleywine - Other
 
 California Common
 Cream Ale  
-Cream Ale - Imperial / Double  
+Cream Ale - Imperial / Double
+
 # German special 
 
 Kölsch
@@ -72,6 +74,7 @@ Schwarzbier
 Rye Beer  / Roggenbier
 Altbier - Sticke  
 Altbier - Traditional
+
 # Belgian special 
 
 Belgian Blonde  
@@ -99,17 +102,17 @@ Fruit Beer
 Chilli / Chile Beer  
 Winter Ale / Winter Warmer
 Grape Ale - Italian / Grape Ale - Other
-Corn Beer / Chicha de Jora
-Honey Beer
-Spiced / Herbed Beer
-Root Beer  
-Koji / Ginjo Beer
-Kvass
-Hard Ginger Beer  
-Hard Kombucha / Jun  
-Hard Seltzer
-Shandy / Radler
-Black & Tan
+- [ ] Corn Beer / Chicha de Jora
+- [ ] Honey Beer
+- [ ] Spiced / Herbed Beer
+- [ ] Root Beer  
+- [ ] Koji / Ginjo Beer
+- [ ] Kvass
+- [ ] Hard Ginger Beer  
+- [ ] Hard Kombucha / Jun  
+- [ ] Hard Seltzer
+- [ ] Shandy / Radler
+- [ ] Black & Tan
 
 # bitter
 
@@ -144,17 +147,17 @@ Brown Ale - Other
 
 # cider
 
-Cider - Applewine  
-Cider - Basque  
-Cider - Dry  
-Cider - Graff  
-Cider - Herbed / Spiced / Hopped  
-Cider - Ice  
-Cider - Other Fruit  
-Cider - Perry / Poiré  
-Cider - Rosé  
-Cider - Sweet  
-Cider - Traditional / Apfelwein  
+- [ ] Cider - Applewine  
+- [ ] Cider - Basque  
+- [ ] Cider - Dry  
+- [ ] Cider - Graff  
+- [ ] Cider - Herbed / Spiced / Hopped  
+- [ ] Cider - Ice  
+- [ ] Cider - Other Fruit  
+- [ ] Cider - Perry / Poiré  
+- [ ] Cider - Rosé  
+- [ ] Cider - Sweet  
+- [ ] Cider - Traditional / Apfelwein  
 
 # farmhouse 
 
@@ -341,16 +344,17 @@ Stout - White / Golden
 
 # wheat 
 
-Wheat Beer - American Pale Wheat  
-Wheat Beer - Dunkelweizen  
-Wheat Beer - Fruited  
-Wheat Beer - Hefeweizen  
-Wheat Beer - Hefeweizen Light / Leicht  
-Wheat Beer - Hopfenweisse  
-Wheat Beer - Kristallweizen  
-Wheat Beer - Other  
-Wheat Beer - Witbier / Blanche  
+- [ ] Wheat Beer - American Pale Wheat  
+- [ ] Wheat Beer - Dunkelweizen  
+- [ ] Wheat Beer - Fruited  
+- [ ] Wheat Beer - Hefeweizen  
+- [ ] Wheat Beer - Hefeweizen Light / Leicht  
+- [ ] Wheat Beer - Hopfenweisse  
+- [ ] Wheat Beer - Kristallweizen  
+- [ ] Wheat Beer - Other  
+- [ ] Wheat Beer - Witbier / Blanche
+
 # wild
 
-Wild Ale - American  
-Wild Ale - Other  
+- [ ] Wild Ale - American  
+- [x] Wild Ale - Other  

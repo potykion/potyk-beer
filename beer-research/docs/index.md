@@ -16,6 +16,7 @@
 
 ### Картинки
 
-- https://wyeastlab.com/beverage-styles/ - картинки
+- https://wyeastlab.com/beverage-styles/ 
+- https://www.pintsandpanels.com/
 
 ![](50-Shades-of-Beer-01-1.png)
