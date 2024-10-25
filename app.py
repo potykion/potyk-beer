@@ -70,12 +70,18 @@ def styles_route():
 
 @app.route("/my-beers")
 def my_beers_route():
+    sort_styles = flask.request.values.get("sort_styles", "name")
+
     beers = q.select_all(
         "select * from beer_my_untappd_beers order by style, rating desc", as_=MyBeer
     )
     beers_by_style = groupby(beers, key=lambda beer: beer["style"])
     beers_by_style = [(style, list(beers)) for style, beers in beers_by_style]
-    beers_by_style = sorted(beers_by_style, key=lambda beer: len(beer[1]), reverse=True)
+
+    if sort_styles == "name":
+        beers_by_style = sorted(beers_by_style, key=lambda beer: beer[0])
+    elif sort_styles == "amount":
+        beers_by_style = sorted(beers_by_style, key=lambda beer: len(beer[1]), reverse=True)
 
     beers_by_brewery = groupby(
         sorted(beers, key=lambda beer: (beer["brewery"], -beer["rating"])),
@@ -88,6 +94,7 @@ def my_beers_route():
         "my_beers.html",
         beers_by_style=beers_by_style,
         beers_by_brewery=beers_by_brewery,
+        sort_styles=sort_styles,
     )
 
 

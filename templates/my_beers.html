@@ -10,6 +10,10 @@
     <div style="display: flex; gap: 20px">
         <div>
             <h2>Styles</h2>
+
+            <a href="?sort_styles=name"   style="{% if sort_styles == 'name' %}font-weight: bold{% endif %}">По названию</a> /
+            <a href="?sort_styles=amount" style="{% if sort_styles == 'amount' %}font-weight: bold{% endif %}">По количеству</a>
+
             {% for style, beers in beers_by_style %}
                 <details>
                     <summary><h3 style="display: inline-block">{{ style }} ({{ beers|length }})</h3>

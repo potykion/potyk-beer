@@ -1,0 +1,34 @@
+site_name: potyk-beer
+site_url: https://potyk.io/beer-research
+theme:
+  name: material
+  features:
+    # Поиск
+    - search.suggest
+    - search.highlight
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+
+  palette:
+    primary: amber
+  icon:
+    logo: material/beer
+
+plugins:
+  # Поиск
+  - search:
+      lang:
+        - en
+        - ru
+markdown_extensions:
+  - pymdownx.magiclink
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
