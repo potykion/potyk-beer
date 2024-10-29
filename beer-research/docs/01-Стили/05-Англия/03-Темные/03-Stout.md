@@ -29,9 +29,9 @@ bjcp:
 
 # Вариации
 
-- [Stout-Milk-Sweet](Stout-Milk-Sweet.md) - послаще
-- [Stout Irish Dry](Stout Irish Dry.md) - посуше
-- [Stout-Export](Stout-Export.md) - покрепче
+- [Stout-Milk-Sweet](../../06-Крафт/02-Тёмное/Stout-Milk-Sweet.md) - послаще
+- [Stout Irish Dry](04-Stout Irish Dry) - посуше
+- [Stout-Export](../../06-Крафт/02-Тёмное/Stout-Export.md) - покрепче
 
 # Примеры
 
