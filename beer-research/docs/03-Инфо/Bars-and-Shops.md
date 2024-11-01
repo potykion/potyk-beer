@@ -30,6 +30,10 @@
 | ЭллиУнесло                  | [:octicons-link-16:](https://elliuneslo.clients.site/)                                                                                            | [🟣 Сходненская](https://yandex.ru/maps/-/CDhKZQZH)        |
 | Salden'S Taphouse Пятницкая | [:simple-telegram:](https://t.me/saldenstaphousemsk)   [:octicons-link-16:](https://www.saldenstaphouse.ru/pyatnickaya)                           | [🟢 Новокузнецкая](https://yandex.ru/maps/-/CDhgIJ3l)      |
 | Ontap Мск                   | [:simple-untappd:](https://untappd.com/v/ontap/11251330)                                                                                          | [🔵 Смоленская](https://yandex.ru/maps/-/CDhgaCLa)         |
+| Rusty Pub                   | [:simple-untappd:](https://2beer4.me/venues/clf2m2lji00qpmbma7ek12sk5)                                                                            | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgyVN9)   |
+| Траектория                  | [:simple-untappd:](https://2beer4.me/venues/clwasa9lw0238mbzvrekfuq6f)                                                                            | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgyCMn)   |
+| Бирвария                    | [:simple-telegram:](https://t.me/beervaria)  [:simple-untappd:](https://2beer4.me/venues/clf2ni4u800zxmbmaqcar8tnt)                               | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgyK8C)   |
+| Пиво и ПенаПаки             | [:simple-untappd:](https://2beer4.me/venues/clf2nc50800zsmbma0rh2w2ne)  [:octicons-link-16:](https://pena.moscow/)                                | [ Войковская](https://yandex.ru/maps/-/CDhgyOoK)           |
 
 **Магазины**
 
@@ -49,43 +53,50 @@
 
 **Бары**
 
-| Название        | Ссылки                                                   | Где                                                      |
-|-----------------|----------------------------------------------------------|----------------------------------------------------------|
-| Beer Mug Казань | [:simple-telegram:](https://t.me/beer_mug_kazan_channel) | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgYV8y) |
+| Название        | Ссылки                                                                 | Где                                                      |
+|-----------------|------------------------------------------------------------------------|----------------------------------------------------------|
+| Beer Mug Казань | [:simple-telegram:](https://t.me/beer_mug_kazan_channel)               | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgYV8y) |
+| Drink Craft     | [:simple-untappd:](https://2beer4.me/venues/clf7ypm9p04prmbm0uoyogswc) | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgy8-2) |
 
 ## Спб
 
 **Бары**
 
-| Название                       | Ссылки                                                                                                             | Где                                                      |
-|--------------------------------|--------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
-| BeerAddictsSyndicate           | [:simple-telegram:](https://t.me/beeraddicts)                                                                      | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhK5FN-) |
-| BEERGEEK                       | [:simple-telegram:](https://t.me/beergeek_spb)                                                                     | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhK5BKs) |
-| сидр и нэнси                   | [:simple-telegram:](https://t.me/ciderandpochemu)                                                                  | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgY6IH) |
-| Крафт Буфет                    | [:simple-telegram:](https://t.me/kraftbufet)                                                                       | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgY62m) |
-| Craft Beer Shop                | [:simple-telegram:](https://t.me/craftbeershop)  [:simple-untappd:](https://untappd.com/v/craft-beer-shop/3856103) | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhcZEIP) |
-| Crowbar                        | [:simple-telegram:](https://t.me/crowbar_spb)                                                                      | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhg4J-0) |
-| BoilerRoom Bar                 | [:simple-telegram:](https://t.me/barbarboiler)                                                                     | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhg4Zk8) |
-| Культура                       | [:simple-telegram:](https://t.me/kulturabarsbp)                                                                    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgaQKA) |
-| Бакунин                        |                                                                                                                    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgaB31) |
-| Ontap                          |                                                                                                                    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgaNm8) |
-| Усы на пене                    |                                                                                                                    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgaSM5) |
-| LetoRoom                       |                                                                                                                    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgaWL0) |
-| Luminous Bar                   | [:simple-untappd:](https://untappd.com/v/luminous-bar/9295472)                                                     | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhga85t) |
-| Dolphinwolf                    |                                                                                                                    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgaH2G) |
-| Redrum                         | [:simple-untappd:](https://untappd.com/v/redrum-bar/2498830)                                                       | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhga2k5) |
-| Zavod                          |                                                                                                                    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgeU7S) |
-| Hop Head Taqueria              |                                                                                                                    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgeZMd) |
-| Тбп                            | [:simple-untappd:](https://untappd.com/v/tbpbar/9350799)                                                           | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgeKOj) |
-| Пивная диета                   |                                                                                                                    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhge8MV) |
-| Ясли                           |                                                                                                                    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgeLo8) |
-| Hop Hunting Club / Бар Арсенал | [:simple-telegram:](https://t.me/hophunting)   [:octicons-link-16:](https://taplink.cc/hophuntingclub)             | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgeX9x) |
+| Название                       | Ссылки                                                                                                                 | Где                                                      |
+|--------------------------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| BeerAddictsSyndicate           | [:simple-telegram:](https://t.me/beeraddicts)                                                                          | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhK5FN-) |
+| BEERGEEK                       | [:simple-telegram:](https://t.me/beergeek_spb)  [:simple-untappd:](https://2beer4.me/venues/clcw3u1x1021tmbqli5gwxbax) | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhK5BKs) |
+| сидр и нэнси                   | [:simple-telegram:](https://t.me/ciderandpochemu)                                                                      | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgY6IH) |
+| Крафт Буфет                    | [:simple-telegram:](https://t.me/kraftbufet)                                                                           | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgY62m) |
+| Craft Beer Shop                | [:simple-telegram:](https://t.me/craftbeershop)  [:simple-untappd:](https://untappd.com/v/craft-beer-shop/3856103)     | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhcZEIP) |
+| Crowbar                        | [:simple-telegram:](https://t.me/crowbar_spb)  [:simple-untappd:](https://2beer4.me/venues/cll3tw3sk02opmb39jmz6cua0)  | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhg4J-0) |
+| BoilerRoom Bar                 | [:simple-telegram:](https://t.me/barbarboiler)  [:simple-untappd:](https://2beer4.me/venues/clrp22pmj06mtmbp1u3kack7m) | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhg4Zk8) |
+| Культура                       | [:simple-telegram:](https://t.me/kulturabarsbp)                                                                        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgaQKA) |
+| Бакунин                        |                                                                                                                        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgaB31) |
+| Ontap                          |                                                                                                                        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgaNm8) |
+| Усы на пене                    |                                                                                                                        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgaSM5) |
+| LetoRoom                       | [:simple-untappd:](https://2beer4.me/venues/clrt8lhn20038mbop8rdfhn3c)                                                 | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgaWL0) |
+| Luminous Bar                   | [:simple-untappd:](https://untappd.com/v/luminous-bar/9295472)                                                         | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhga85t) |
+| Dolphinwolf                    | [:simple-untappd:](https://2beer4.me/venues/cljny8ub5001jmblak9mpqd5j)                                                 | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgaH2G) |
+| Redrum                         | [:simple-untappd:](https://untappd.com/v/redrum-bar/2498830)                                                           | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhga2k5) |
+| Zavod                          |                                                                                                                        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgeU7S) |
+| Hop Head Taqueria              |                                                                                                                        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgeZMd) |
+| Тбп                            | [:simple-untappd:](https://untappd.com/v/tbpbar/9350799)                                                               | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgeKOj) |
+| Пивная диета                   |                                                                                                                        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhge8MV) |
+| Ясли                           |                                                                                                                        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgeLo8) |
+| Hop Hunting Club / Бар Арсенал | [:simple-telegram:](https://t.me/hophunting)   [:octicons-link-16:](https://taplink.cc/hophuntingclub)                 | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgeX9x) |
+| Баланс Белого                  | [:simple-untappd:](https://2beer4.me/venues/cleinrqj800mrmblfet6n43x1)                                                 | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgyAkg) |
+| Jawsspot                       | [:simple-untappd:](https://2beer4.me/venues/clcqbr2lz002rmbqly5luyfom)                                                 | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgu802) |
+| Бирвария                       | [:simple-telegram:](https://t.me/beervaria)  [:simple-untappd:](https://2beer4.me/venues/clcs757tv00jymbqlwv9vokat)    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhguTnm) |
+| Ciderpunk                      | [:simple-untappd:](https://2beer4.me/venues/clpcm3egt02mnmbpdw3qlppgv)                                                 | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgyAkg) |
+| DadaBar                        | [:simple-untappd:](https://2beer4.me/venues/clh0p0v9w03zgmbrfu3rl31ot)                                                 | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgyU2A) |
+| Gas Brew                       | [:simple-untappd:](https://2beer4.me/venues/cl4ipgw0y0193mljle5mu3q48)                                                 | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgy4jm) |
 
 **Пивоварняы**
 
-| Название        | Ссылки                                        | Где                                                      |
-|-----------------|-----------------------------------------------|----------------------------------------------------------|
-| Af Brew Taproom | [:simple-telegram:](https://t.me/afbrewandco) | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgeFig) |
+| Название        | Ссылки                                                                                                                | Где                                                      |
+|-----------------|-----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| Af Brew Taproom | [:simple-telegram:](https://t.me/afbrewandco)  [:simple-untappd:](https://2beer4.me/venues/cld79t41d000gmbxxwcag0wfy) | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgeFig) |
 
 ## Сочи
 
@@ -139,10 +150,11 @@
 
 **Бары**
 
-| Название | Ссылки | Где                                                      |
-|----------|--------|----------------------------------------------------------|
-| Свои     |        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhKyXLc) |
-| Rewort   |        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhK5J9m) |
+| Название | Ссылки                                                                 | Где                                                      |
+|----------|------------------------------------------------------------------------|----------------------------------------------------------|
+| Свои     |                                                                        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhKyXLc) |
+| Rewort   | [:simple-untappd:](https://2beer4.me/venues/cloyexqk100c8mbpd0h34sdhx) | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhK5J9m) |
+| Zabava   | [:simple-untappd:](https://2beer4.me/venues/cln0bxz8f00mimbxa9ibzt09o) | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgy20Z) |
 
 **Пивоварняы**
 
@@ -154,19 +166,22 @@
 
 **Бары**
 
-| Название          | Ссылки | Где                                                      |
-|-------------------|--------|----------------------------------------------------------|
-| Вкусное Магазин   |        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhK5EmE) |
-| Вкусное Бар       |        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhK5Uo3) |
-| 4BREWERS Владимир |        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgYPl-) |
+| Название          | Ссылки                                                                 | Где                                                      |
+|-------------------|------------------------------------------------------------------------|----------------------------------------------------------|
+| Вкусное Магазин   |                                                                        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhK5EmE) |
+| Вкусное Бар       |                                                                        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhK5Uo3) |
+| 4BREWERS Владимир |                                                                        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgYPl-) |
+| Подстава          | [:simple-untappd:](https://2beer4.me/venues/cllez1gdw001zmb5usf84is3l) | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgyHlm) |
+| Пивотека          | [:simple-untappd:](https://2beer4.me/venues/clcw4ivwq02kymbqrblmih6gw) | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgyT9v) |
 
 ## Ярославль
 
 **Бары**
 
-| Название | Ссылки | Где                                                      |
-|----------|--------|----------------------------------------------------------|
-| Разлука  |        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhK5YL6) |
+| Название | Ссылки                                                                 | Где                                                      |
+|----------|------------------------------------------------------------------------|----------------------------------------------------------|
+| Разлука  |                                                                        | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhK5YL6) |
+| Magnum   | [:simple-untappd:](https://2beer4.me/venues/clvqw9jgf00htmbrtk4ixombj) | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgyN~g) |
 
 ## Мытищи
 
