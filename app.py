@@ -1,12 +1,17 @@
 import dataclasses
 import json
 import sqlite3
+from collections import defaultdict
 from itertools import groupby
-from typing import TypedDict
+from pathlib import Path
+from typing import TypedDict, Literal
 
 import flask
+from flask import render_template
 
 from b3.q import Q
+
+BASE_DIR = Path(__file__).parent
 
 
 class BeerStyleExample(TypedDict):
@@ -81,14 +86,18 @@ def my_beers_route():
     if sort_styles == "name":
         beers_by_style = sorted(beers_by_style, key=lambda beer: beer[0])
     elif sort_styles == "amount":
-        beers_by_style = sorted(beers_by_style, key=lambda beer: len(beer[1]), reverse=True)
+        beers_by_style = sorted(
+            beers_by_style, key=lambda beer: len(beer[1]), reverse=True
+        )
 
     beers_by_brewery = groupby(
         sorted(beers, key=lambda beer: (beer["brewery"], -beer["rating"])),
         key=lambda beer: beer["brewery"],
     )
     beers_by_brewery = [(brewery, list(beers)) for brewery, beers in beers_by_brewery]
-    beers_by_brewery = sorted(beers_by_brewery, key=lambda beer: len(beer[1]), reverse=True)
+    beers_by_brewery = sorted(
+        beers_by_brewery, key=lambda beer: len(beer[1]), reverse=True
+    )
 
     return flask.render_template(
         "my_beers.html",
@@ -96,6 +105,67 @@ def my_beers_route():
         beers_by_brewery=beers_by_brewery,
         sort_styles=sort_styles,
     )
+
+
+class BeerPlace(TypedDict):
+    id: int
+    name: str
+    city: str | None
+    metro: str | None
+    yandex_maps: str | None
+    site: str | None
+    telegram: str | None
+    untappd: str | None
+    untappd_verified: bool | None
+    type: Literal[
+        "Бар",
+        "Магазин",
+    ]
+
+
+METRO_TO_COLOR = {
+    "Маяковская": "🟢",
+    "Новокузнецкая": "🟢",
+    "Белорусская": "🟢",
+    "Южная": "🩶",
+    "Академическая": "🟠",
+    "Арбатская": "🔵",
+    "Электрозаводская": "🔵",
+    "Славянский бульвар": "🔵",
+    "Смоленская": "🔵",
+    "Сходненская": "🟣",
+    "Таганская": "🟣",
+    "Пушкинская": "🟣",
+    "Добрынинская": "🟤",
+    "Чистые пруды": "🔴",
+    "Лубянка": "🔴",
+    "Красные Ворота": "🔴",
+    "Раменки": "🟡",
+}
+
+
+@app.get("/admin")
+def admin():
+    connection = sqlite3.connect(
+        BASE_DIR / "beer-places.sqlite", check_same_thread=False
+    )
+    connection.row_factory = sqlite3.Row
+    cursor = connection.cursor()
+
+    beer_places = cursor.execute("select * from beer_place")
+    beer_places = [BeerPlace(**row) for row in beer_places]
+
+    beer_places_by_city = defaultdict(lambda: defaultdict(list))
+    for beer_place in beer_places:
+        beer_places_by_city[beer_place["city"]][beer_place["type"]].append(beer_place)
+
+    beer_places_html = render_template(
+        "render/beer_places.md",
+        beer_places_by_city=beer_places_by_city,
+        METRO_TO_COLOR=METRO_TO_COLOR,
+    )
+
+    return render_template("admin.html", beer_places_html=beer_places_html)
 
 
 if __name__ == "__main__":

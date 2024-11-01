@@ -1,0 +1,193 @@
+{
+  "main": {
+    "id": "fc26122f4bb39453",
+    "type": "split",
+    "children": [
+      {
+        "id": "0e81f95fe1f1d9a8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "39e34a24b02b15c6",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1d6370ebd86a2237",
+    "type": "split",
+    "children": [
+      {
+        "id": "c7f2b64c6e613a4d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "67a6c44bd1fac83d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "e4228a28cb39e108",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "fc01b4e006fc27b3",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b489d95c67a6c4fd",
+    "type": "split",
+    "children": [
+      {
+        "id": "2778381ab78f93c9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ccec65f34057238a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "de102e7304a13902",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "eb4375faccb75387",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "621eec2eb0288237",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {},
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "39e34a24b02b15c6",
+  "lastOpenFiles": [
+    "docs/01-Стили/photo_2024-10-30_21-28-33.jpg",
+    "docs/01-Стили/photo_2024-10-30_21-28-35.jpg",
+    "docs/01-Стили/photo_2024-10-30_21-28-38.jpg",
+    "docs/01-Стили/photo_2024-10-30_21-28-40.jpg",
+    "docs/01-Стили/photo_2024-10-30_21-28-44.jpg",
+    "docs/01-Стили/photo_2024-10-30_21-28-47.jpg",
+    "docs/01-Стили/photo_2024-10-30_21-28-50.jpg",
+    "docs/01-Стили/photo_2024-10-30_21-28-53.jpg",
+    "docs/01-Стили/photo_2024-10-30_21-28-29.jpg",
+    "docs/index.md~",
+    "docs/03-Инфо/Ресурсы.md",
+    "docs/03-Инфо/Заведения-и-Магазы.md",
+    "docs/03-Инфо/Каналы.md",
+    "docs/03-Инфо/Движи.md",
+    "docs/03-Инфо",
+    "drafts/03-Глоссарий/Хмель.md",
+    "drafts/03-Глоссарий/index.md",
+    "drafts/03-Глоссарий",
+    "docs/04-Инфо/Движи.md~",
+    "docs/02-Пивоварни/index.md",
+    "docs/03-Глоссарий/index.md",
+    "docs/04-Инфо/Ресурсы.md",
+    "docs/04-Инфо/Каналы.md~",
+    "docs/04-Инфо/Заведения-и-Магазы.md~",
+    "docs/04-Движ/Заведения-и-Магазы.md",
+    "docs/04-Инфо/Каналы.md",
+    "docs/04-Инфо/Заведения-и-Магазы.md",
+    "docs/04-Инфо/Движи.md",
+    "docs/04-Инфо/index.md",
+    "docs/04-Инфо",
+    "docs/04-Движ/Заведения-и-Магазы.md~",
+    "docs/04-Движ/Каналы.md",
+    "docs/04-Движ/index.md"
+  ]
+}
