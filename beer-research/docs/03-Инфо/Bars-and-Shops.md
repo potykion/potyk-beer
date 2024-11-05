@@ -21,7 +21,7 @@
 | Имею Право Чертаново | [:simple-telegram:](https://t.me/imeyupravo_beershop)  [:simple-untappd:](https://untappd.com/venue/9395517)   | [🩶 Южная](https://yandex.ru/maps/-/CDhnf-p~) |
 | Имею Право Академическая | [:simple-telegram:](https://t.me/imeyupravo_beershop)  [:simple-untappd:](https://untappd.com/v/magazin-bar-imeyu-pravo-akademicheskaya/12588903)   | [🟠 Академическая](https://yandex.ru/maps/-/CDhnfTjb) |
 | Rule Taproom |  [:simple-untappd:](https://untappd.com/venue/3363317)  [:octicons-link-16:](http://www.ruletaproom.ru/)  | [🔵 Арбатская](https://yandex.ru/maps/-/CDhnfN3R) |
-| Крафтлэнд | [:simple-telegram:](https://t.me/craftland_broni)    | [🟣 Таганская](https://yandex.ru/maps/-/CDhnjKO-) |
+| Крафтлэнд / Craftland | [:simple-telegram:](https://t.me/craftland_broni)    | [🟣 Таганская](https://yandex.ru/maps/-/CDhnjKO-) |
 | Craft Republic |  [:simple-untappd:](https://untappd.com/venue/2180553)   | [🟣 Пушкинская](https://yandex.ru/maps/-/CDhnrUYj) |
 | Jawsspot |   [:octicons-link-16:](https://jawsbeer.ru/spot)  | [🟣 Пушкинская](https://yandex.ru/maps/-/CDhrER5w) |
 | Эрик Рыжий | [:simple-telegram:](https://t.me/ericred_pub)  [:simple-untappd:](https://untappd.com/v/eric-the-red/3797427)   | [🔵 Смоленская](https://yandex.ru/maps/-/CDhnfI51) |
@@ -40,6 +40,16 @@
 | Сидротека | [:simple-telegram:](https://t.me/cidroteka)    | [ Профсоюзная](https://yandex.ru/maps/-/CDh1ZONN) |
 | Все твои друзья |   [:octicons-link-16:](https://t.me/shirokayabar)  | [🟣 Пушкинская](https://yandex.ru/maps/-/CDh16Jn~) |
 | Братья Крафт/Craft Brothers  | [:simple-telegram:](https://t.me/craftbrothersbar)  [:simple-untappd:](https://untappd.com/v/bratya-kraftcraft-brothers/3943033)   | [ Университет](https://yandex.ru/maps/-/CDh1bIoE) |
+| Howard Loves Craft | [:simple-telegram:](https://t.me/HLCbar)    | [ Кропоткинская](https://yandex.ru/maps/-/CDh~rBz8) |
+| Тропа | [:simple-telegram:](https://t.me/tropacider)    | [ Кропоткинская](https://yandex.ru/maps/-/CDh~rG6J) |
+| Etudes Cafe | [:simple-telegram:](https://t.me/etudes_cafe)  [:simple-untappd:](https://2beer4.me/venues/clemukjzf02jambl1gksg2wmc)  [:octicons-link-16:](https://etudes-cafe.ru/)  | [🔴 Чистые пруды](https://yandex.ru/maps/-/CDh~rDYQ) |
+| Axiom Бауманская | [:simple-telegram:](https://t.me/axiompub_msk)    | [ Бауманская](https://yandex.ru/maps/-/CDh~vJlt) |
+| Спица | [:simple-telegram:](https://t.me/spitsabar)    | [🔴 Лубянка](https://yandex.ru/maps/-/CDh~vKIl) |
+| Beer Team |  [:simple-untappd:](https://2beer4.me/venues/clf2nllmr024pmbm020epehet)   | [ Водный стадион](https://yandex.ru/maps/-/CDh~v-n8) |
+| WE Cideria Маяковская | [:simple-telegram:](https://t.me/we_cidreria)   [:octicons-link-16:](https://whiteeagles.ru/)  | [🟢 Маяковская](https://yandex.ru/maps/-/CDh~zC0B) |
+| WE Cideria Маяковская | [:simple-telegram:](https://t.me/we_cidreria)   [:octicons-link-16:](https://whiteeagles.ru/)  | [🟢 Маяковская](https://yandex.ru/maps/-/CDh~zC0B) |
+| WE Cideria Китай-город | [:simple-telegram:](https://t.me/we_cidreria)   [:octicons-link-16:](https://whiteeagles.ru/)  | [ Китай-город](https://yandex.ru/maps/-/CDh~zTOm) |
+| WE Cideria Сухаревская | [:simple-telegram:](https://t.me/we_cidreria)   [:octicons-link-16:](https://whiteeagles.ru/)  | [ Сухаревская](https://yandex.ru/maps/-/CDh~7AY2) |
 
 
 **Магазины**
@@ -108,6 +118,7 @@
 | Хороший повод |    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDh1RDzw) |
 | СКВЕР  | [:simple-telegram:](https://t.me/skver_bar)    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDh1VD5t) |
 | Пивной склад | [:simple-telegram:](https://t.me/pivnoy_sklad)    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDh1Z8-y) |
+| Гедонист |   [:octicons-link-16:](https://salonhedonist.ru/)  | [:simple-googlemaps:](https://yandex.ru/maps/-/CDh~zJ24) |
 
 
 **Пивоварняы**
@@ -138,6 +149,7 @@
 |----------|--------|-----|
 | BVB Taproom | [:simple-telegram:](https://t.me/bvbtaproom)    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhKuY-z) |
 | Hopkins  |    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDh1ZUmw) |
+| Кулибин | [:simple-telegram:](https://t.me/kulibinpub)    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDh~vEnK) |
 
 
 ## Королев
@@ -229,6 +241,10 @@
 |----------|--------|-----|
 | Разлука |    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhK5YL6) |
 | Magnum |  [:simple-untappd:](https://2beer4.me/venues/clvqw9jgf00htmbrtk4ixombj)   | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhgyN~g) |
+| Magnum |  [:simple-untappd:](https://2beer4.me/venues/clvqw9jgf00htmbrtk4ixombj)   | [:simple-googlemaps:](https://yandex.ru/maps/-/CDtAEX9O) |
+| Plan B |    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDtAIUOB) |
+| Хмель & Гриль |    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDtAIB6G) |
+| Пинта |    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDtAIRI6) |
 
 
 ## Мытищи
@@ -267,6 +283,7 @@
 | Типография Ruinpub |    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhnnNpo) |
 | GUSI в Городе |  [:simple-untappd:](https://untappd.com/venue/7575474)   | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhnnC~U) |
 | Melomel Bar |    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDhnn-lC) |
+| GUSI в Академе |  [:simple-untappd:](https://2beer4.me/venues/clf710itk04opmbm0yifgug5w)   | [:simple-googlemaps:](https://yandex.ru/maps/-/CDtAESiO) |
 
 
 ## Подмосковье
@@ -334,6 +351,7 @@
 |----------|--------|-----|
 | Голодранец |    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDh1RRNl) |
 | Jungle |    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDh1ZTOL) |
+| Шрум | [:simple-telegram:](https://t.me/korporatsiia)    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDh1rSnG) |
 
 
 ## Екб
@@ -393,3 +411,14 @@
 | Название | Ссылки | Где |
 |----------|--------|-----|
 | Рыжий ёж | [:simple-telegram:](https://t.me/ryezh)    | [:simple-googlemaps:](https://yandex.ru/maps/-/CDh16PLK) |
+
+
+## Барнаул
+
+
+
+**Бары**
+
+| Название | Ссылки | Где |
+|----------|--------|-----|
+| Art'A Pub |  [:simple-untappd:](https://2beer4.me/venues/cm2bzvw7m003umbrrga7qv67k)   | [:simple-googlemaps:](https://yandex.ru/maps/-/CDh~fQ7m) |
