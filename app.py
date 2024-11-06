@@ -127,9 +127,10 @@ METRO_TO_COLOR = {
     "Маяковская": "🟢",
     "Новокузнецкая": "🟢",
     "Белорусская": "🟢",
+    "Водный стадион": "🟢",
     "Южная": "🩶",
-    "Академическая": "🟠",
     "Арбатская": "🔵",
+    "Бауманская": "🔵",
     "Электрозаводская": "🔵",
     "Славянский бульвар": "🔵",
     "Смоленская": "🔵",
@@ -139,33 +140,44 @@ METRO_TO_COLOR = {
     "Добрынинская": "🟤",
     "Чистые пруды": "🔴",
     "Лубянка": "🔴",
+    "Кропоткинская": "🔴",
     "Красные Ворота": "🔴",
+    "Университет": "🔴",
+    "Китай-город": "🟠",
+    "Сухаревская": "🟠",
+    "Академическая": "🟠",
+
     "Раменки": "🟡",
 }
 
 
 @app.get("/admin")
 def admin():
+
+
+    return render_template("admin.html", )
+
+@app.get("/admin/beer-places")
+def admin_beer_places():
     connection = sqlite3.connect(
         BASE_DIR / "beer-places.sqlite", check_same_thread=False
     )
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
 
-    beer_places = cursor.execute("select * from beer_place")
+    beer_places = cursor.execute("select * from beer_place order by name")
     beer_places = [BeerPlace(**row) for row in beer_places]
 
     beer_places_by_city = defaultdict(lambda: defaultdict(list))
     for beer_place in beer_places:
         beer_places_by_city[beer_place["city"]][beer_place["type"]].append(beer_place)
 
-    beer_places_html = render_template(
+    md = render_template(
         "render/beer_places.md",
         beer_places_by_city=beer_places_by_city,
         METRO_TO_COLOR=METRO_TO_COLOR,
     )
-
-    return render_template("admin.html", beer_places_html=beer_places_html)
+    return f'    <pre><code>{md}</code></pre>'
 
 
 if __name__ == "__main__":
