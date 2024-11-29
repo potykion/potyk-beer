@@ -11,16 +11,17 @@ const {data: beers} = await useFetch<Beer[]>('/api/beers')
 
 const groupers = [
   {
-    title: 'Пивоварня',
-    value: 'brewery',
-  },
-  {
     title: 'Стиль',
     value: 'style',
   },
+  {
+    title: 'Пивоварня',
+    value: 'brewery',
+  },
+
 ]
 
-const selectedGroups = ref<string[]>([])
+const selectedGroups = ref<string[]>(['style'])
 
 type GroupedBeers = {
   [key: string]: Beer[] | {
@@ -28,20 +29,60 @@ type GroupedBeers = {
   }
 }
 
-// Функция для группировки пива
+// Функция сортировки групп
+const sortGroups = (groups: GroupedBeers): GroupedBeers => {
+  if (!selectedGroupSorters.value.length) return groups
+  
+  const entries = Object.entries(groups)
+  if (entries.length <= 1) return groups
+  
+  const sortType = selectedGroupSorters.value[0]
+  
+  // Сортировка групп первого уровня
+  const sortedEntries = entries.sort((a, b) => {
+    if (a[0] === 'ungrouped') return 1
+    if (b[0] === 'ungrouped') return -1
+    
+    if (sortType === 'amount') {
+      const aSize = isBeersArray(a[1]) ? a[1].length : Object.values(a[1]).reduce((sum, arr) => sum + arr.length, 0)
+      const bSize = isBeersArray(b[1]) ? b[1].length : Object.values(b[1]).reduce((sum, arr) => sum + arr.length, 0)
+      return bSize - aSize
+    } else {
+      return a[0].localeCompare(b[0])
+    }
+  })
+  
+  // Сортировка подгрупп
+  const sortedGroups = sortedEntries.map(([key, value]) => {
+    if (!isBeersArray(value)) {
+      const subEntries = Object.entries(value)
+      const sortedSubEntries = subEntries.sort((a, b) => {
+        if (sortType === 'amount') {
+          return b[1].length - a[1].length
+        } else {
+          return a[0].localeCompare(b[0])
+        }
+      })
+      return [key, Object.fromEntries(sortedSubEntries)]
+    }
+    return [key, value]
+  })
+  
+  return Object.fromEntries(sortedGroups)
+}
+
+// Обновляем вычисляемое свойство groupedBeers
 const groupedBeers = computed(() => {
   if (!beers.value || selectedGroups.value.length === 0) {
-    return { ungrouped: beers.value || [] }
+    return {ungrouped: beers.value || []}
   }
 
   const result: GroupedBeers = {}
-  
-  // Ограничиваем количество группировок до 2
   const activeGroups = selectedGroups.value.slice(0, 2)
-  
+
   beers.value.forEach((beer) => {
     const firstKey = beer[activeGroups[0] as keyof Beer] as string
-    
+
     if (activeGroups.length === 1) {
       if (!result[firstKey]) {
         result[firstKey] = []
@@ -51,24 +92,55 @@ const groupedBeers = computed(() => {
       if (!result[firstKey]) {
         result[firstKey] = {}
       }
-      
+
       const secondKey = beer[activeGroups[1] as keyof Beer] as string
       const subGroup = result[firstKey] as { [key: string]: Beer[] }
-      
+
       if (!subGroup[secondKey]) {
         subGroup[secondKey] = []
       }
       subGroup[secondKey].push(beer)
     }
   })
-  
-  return result
+
+  // Применяем сортировку групп
+  return sortGroups(result)
 })
 
 // Проверка является ли группа массивом пива
 const isBeersArray = (value: Beer[] | { [key: string]: Beer[] }): value is Beer[] => {
   return Array.isArray(value)
 }
+
+
+const groupSorters = [
+  {
+    title: "По количеству",
+    value: "amount",
+  },
+  {
+    title: "По названию",
+    value: "name",
+  },
+
+];
+
+const selectedGroupSorters = ref<string[]>(["amount"])
+
+const insideGroupSorters = [
+  {
+    title: "По рейтингу",
+    value: "rating",
+  },
+  {
+    title: "По названию",
+    value: "name",
+  }
+];
+
+const selectedInsideGroupSorters = ref<string[]>(["rating"])
+
+
 </script>
 
 <template>
@@ -88,11 +160,25 @@ const isBeersArray = (value: Beer[] | { [key: string]: Beer[] }): value is Beer[
             :rules="[v => v.length <= 2 || 'Максимум 2 группировки']"
         ></v-select>
       </v-col>
+
       <v-col>
         <v-select
+            v-model="selectedGroupSorters"
             chips
-            label="Сортировка"
-            :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+            label="Сортировка групп"
+            :items="groupSorters"
+            multiple
+            variant="outlined"
+            density="compact"
+        ></v-select>
+      </v-col>
+
+      <v-col>
+        <v-select
+            v-model="selectedInsideGroupSorters"
+            chips
+            label="Сортировка внутри гр��ппы"
+            :items="insideGroupSorters"
             multiple
             variant="outlined"
             density="compact"
@@ -104,9 +190,9 @@ const isBeersArray = (value: Beer[] | { [key: string]: Beer[] }): value is Beer[
       <template v-for="(groupContent, groupName) in groupedBeers" :key="groupName">
         <!-- Заголовок первого уровня -->
         <v-list-subheader v-if="selectedGroups.length > 0 && groupName !== 'ungrouped'">
-          {{ groupName }}
+          {{ groupName }} ({{ groupContent.length }})
         </v-list-subheader>
-        
+
         <!-- Если это финальная группа с пивом -->
         <template v-if="isBeersArray(groupContent)">
           <v-list density="compact">
@@ -122,12 +208,12 @@ const isBeersArray = (value: Beer[] | { [key: string]: Beer[] }): value is Beer[
             </v-list-item>
           </v-list>
         </template>
-        
+
         <!-- Если это подгруппа -->
         <template v-else>
           <div class="pl-4">
             <template v-for="(subGroupBeers, subGroupName) in groupContent" :key="subGroupName">
-              <v-list-subheader>{{ subGroupName }}</v-list-subheader>
+              <v-list-subheader>{{ subGroupName }} ({{ subGroupBeers.length }})</v-list-subheader>
               <v-list density="compact">
                 <v-list-item
                     v-for="beer in subGroupBeers"
