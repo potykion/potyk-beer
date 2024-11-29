@@ -210,7 +210,7 @@ const selectedInsideGroupSorters = ref<string[]>(["rating"])
         <v-select
             v-model="selectedInsideGroupSorters"
             chips
-            label="Сортировка внутри грппы"
+            label="Сортировка внутри группы"
             :items="insideGroupSorters"
             multiple
             variant="outlined"
@@ -229,52 +229,69 @@ const selectedInsideGroupSorters = ref<string[]>(["rating"])
       </v-col>
     </v-row>
 
-    <div>
+    <v-list>
       <template v-for="(groupContent, groupName) in groupedBeers" :key="groupName">
-        <!-- Заголовок первого уровня -->
-        <v-list-subheader v-if="selectedGroups.length > 0 && groupName !== 'ungrouped'">
-          {{ groupName }} ({{ isBeersArray(groupContent) ? groupContent.length : 
-            Object.values(groupContent).reduce((sum, arr) => sum + arr.length, 0) }})
-        </v-list-subheader>
+        <template v-if="groupName !== 'ungrouped'">
+          <!-- Группа первого уровня -->
+          <v-list-group>
+            <template v-slot:activator="{ props }">
+              <v-list-item
+                  v-bind="props"
+                  :title="`${groupName} (${isBeersArray(groupContent) ? 
+                    groupContent.length : 
+                    Object.values(groupContent).reduce((sum, arr) => sum + arr.length, 0)})`"
+              />
+            </template>
 
-        <!-- Если это финальная группа с пивом -->
-        <template v-if="isBeersArray(groupContent)">
-          <v-list density="compact">
-            <v-list-item
-                v-for="beer in groupContent"
-                :key="`${beer.brewery}-${beer.name}`"
-                :href="beer.url"
-                target="_blank"
-            >
-              <v-list-item-title>
-                {{ beer.brewery }} — {{ beer.name }} ({{ beer.rating }})
-              </v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </template>
+            <!-- Если это финальная группа с пивом -->
+            <template v-if="isBeersArray(groupContent)">
+              <v-list-item
+                  v-for="beer in groupContent"
+                  :key="`${beer.brewery}-${beer.name}`"
+                  :href="beer.url"
+                  :title="`${beer.brewery} — ${beer.name} (${beer.rating})`"
+                  target="_blank"
+                  density="compact"
+              />
+            </template>
 
-        <!-- Если это подгруппа -->
-        <template v-else>
-          <div class="pl-4">
-            <template v-for="(subGroupBeers, subGroupName) in groupContent" :key="subGroupName">
-              <v-list-subheader>{{ subGroupName }} ({{ subGroupBeers.length }})</v-list-subheader>
-              <v-list density="compact">
+            <!-- Если это подгруппа -->
+            <template v-else>
+              <v-list-group v-for="(subGroupBeers, subGroupName) in groupContent" :key="subGroupName">
+                <template v-slot:activator="{ props }">
+                  <v-list-item
+                      v-bind="props"
+                      :title="`${subGroupName} (${subGroupBeers.length})`"
+                      density="compact"
+                  />
+                </template>
+
                 <v-list-item
                     v-for="beer in subGroupBeers"
                     :key="`${beer.brewery}-${beer.name}`"
                     :href="beer.url"
+                    :title="`${beer.brewery} — ${beer.name} (${beer.rating})`"
                     target="_blank"
-                >
-                  <v-list-item-title>
-                    {{ beer.brewery }} — {{ beer.name }} ({{ beer.rating }})
-                  </v-list-item-title>
-                </v-list-item>
-              </v-list>
+                    density="compact"
+                />
+              </v-list-group>
             </template>
-          </div>
+          </v-list-group>
+        </template>
+
+        <!-- Если нет группировки -->
+        <template v-else>
+          <v-list-item
+              v-for="beer in groupContent"
+              :key="`${beer.brewery}-${beer.name}`"
+              :href="beer.url"
+              :title="`${beer.brewery} — ${beer.name} (${beer.rating})`"
+              target="_blank"
+              density="compact"
+          />
         </template>
       </template>
-    </div>
+    </v-list>
   </v-container>
 </template>
 
