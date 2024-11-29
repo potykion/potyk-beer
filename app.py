@@ -107,6 +107,21 @@ def my_beers_route():
     )
 
 
+
+@app.route("/v2")
+def v2_route():
+    conn = sqlite3.connect(BASE_DIR / "beer.db", check_same_thread=False)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    beers = cursor.execute("select * from beer_my_untappd_beers").fetchall()
+
+    return flask.render_template(
+        "index_v2.html",
+        beers=beers,
+    )
+
+
 class BeerPlace(TypedDict):
     id: int
     name: str

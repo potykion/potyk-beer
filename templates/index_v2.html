@@ -1,0 +1,27 @@
+{% extends "_layout.html" %}
+
+{% set title = "Beer Board" %}
+
+{% block content %}
+
+    <h1>Пивко</h1>
+
+    <div><b>Группировка</b></div>
+
+    <div>
+        <label>
+            <input type="checkbox"> Пивоварня
+        </label>
+        <label>
+            <input type="checkbox"> Стиль
+        </label>
+    </div>
+
+    <div style="padding-top: 10px">
+        {% for beer in beers %}
+            <div>
+                <a href="{{ beer.url }}">{{ beer.brewery }} — {{ beer.name }}</a> ({{ beer.rating }})
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
