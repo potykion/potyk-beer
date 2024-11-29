@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import BeerListItem from '~/components/BeerListItem.vue'
+
 interface Beer {
   brewery: string
   name: string
@@ -241,13 +243,12 @@ const isBeersArray = (value: Beer[] | { [key: string]: Beer[] }): value is Beer[
 
             <!-- Если это финальная группа с пивом -->
             <template v-if="isBeersArray(groupContent)">
-              <v-list-item
+              <BeerListItem
                   v-for="beer in groupContent"
                   :key="`${beer.brewery}-${beer.name}`"
-                  :href="beer.url"
-                  :title="`${beer.brewery} — ${beer.name} (${beer.rating})`"
-                  target="_blank"
-                  density="compact"
+                  :beer="beer"
+                    
+
               />
             </template>
 
@@ -262,13 +263,11 @@ const isBeersArray = (value: Beer[] | { [key: string]: Beer[] }): value is Beer[
                   />
                 </template>
 
-                <v-list-item
+                <BeerListItem
                     v-for="beer in subGroupBeers"
                     :key="`${beer.brewery}-${beer.name}`"
-                    :href="beer.url"
-                    :title="`${beer.brewery} — ${beer.name} (${beer.rating})`"
-                    target="_blank"
-                    density="compact"
+                    :beer="beer"
+                    
                 />
               </v-list-group>
             </template>
@@ -277,13 +276,11 @@ const isBeersArray = (value: Beer[] | { [key: string]: Beer[] }): value is Beer[
 
         <!-- Если нет группировки -->
         <template v-else>
-          <v-list-item
+          <BeerListItem
               v-for="beer in groupContent"
               :key="`${beer.brewery}-${beer.name}`"
-              :href="beer.url"
-              :title="`${beer.brewery} — ${beer.name} (${beer.rating})`"
-              target="_blank"
-              density="compact"
+              :beer="beer"
+              
           />
         </template>
       </template>
