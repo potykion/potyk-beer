@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "daisyui": "^4.4.23",
+    "tailwindcss": "^3.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tw-watch": "npx tailwindcss -i ./static/tailwind.css -o ./static/output.css --watch"
+  }
+}

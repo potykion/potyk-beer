@@ -1,0 +1,517 @@
+country_or_type,style,count(style)
+Австралия,Lemonade,14
+Австрия,German Pils,4
+Австрия,Doppelbock,3
+Австрия,Low Alcohol,3
+Австрия,International Pale Lager,3
+Австрия,Helles Weizen,2
+Австрия,International Amber Lager,1
+Австрия,Belgian Dark Strong Ale,1
+Австрия,Belgian Blond Ale,1
+Австрия,Dunkel,1
+Австрия,Vienna Lager,1
+Австрия,BA Bock / Doppelbock,1
+Австрия,Helles Kellerbier,1
+Австрия,Marzen / Festbier,1
+Австрия,Dortmunder / Export,1
+Австрия,Munich Helles,1
+Австрия,Imperial Pilsner,1
+Армения,International Pale Lager,10
+Армения,Dortmunder / Export,2
+Армения,International Dark Lager,1
+БЕЗАЛКОГОЛЬНОЕ,LEMONADE,2
+БЕЗАЛКОГОЛЬНОЕ,KVASS,1
+Беларусь,Melomel,3
+Беларусь,Cider with Other Fruit,1
+Бельгия,Oude Gueuze,87
+Бельгия,Oude Kriek Lambic,67
+Бельгия,Oude Fruit Lambic,58
+Бельгия,Belgian Tripel,50
+Бельгия,Belgian Blond Ale,45
+Бельгия,Fruit lambic,40
+Бельгия,Belgian Dubbel,32
+Бельгия,Belgian Dark Strong Ale,32
+Бельгия,Belgian Strong Ale,30
+Бельгия,Oud Bruin,25
+Бельгия,Fruit beer,24
+Бельгия,Witbier / Blanche,24
+Бельгия,Oude Lambic,24
+Бельгия,Gueuze / Geuze,20
+Бельгия,Strong Fruit Beer,19
+Бельгия,Набор,15
+Бельгия,Belgian Strong Golden Ale,15
+Бельгия,Flemish Red Sour Ale,14
+Бельгия,Imperial Stout,13
+Бельгия,Wild Sour Ale,11
+Бельгия,Kriek Lambic,10
+Бельгия,BA Sour Ale,9
+Бельгия,BA Wild Sour Ale,8
+Бельгия,IPA,7
+Бельгия,Saison,7
+Бельгия,American Blond Ale,7
+Бельгия,Sour Fruit Ale,6
+Бельгия,International Pale Lager,6
+Бельгия,BA Imperial Stout,6
+Бельгия,Belgian Dark Ale,5
+Бельгия,BA Belgian Dark Strong Ale,4
+Бельгия,Amber Ale,4
+Бельгия,Strong Traditional Ale / Strong Farmhouse Ale,3
+Бельгия,Foreign Extra Stout,3
+Бельгия,Patersbier,3
+Бельгия,Fruited Berliner Weisse,3
+Бельгия,Belgian IPA,3
+Бельгия,Wild Tripel,3
+Бельгия,Wild Sour Fruit Ale,2
+Бельгия,Strong Spiced Ale,2
+Бельгия,BA Barleywine / Wheatwine,2
+Бельгия,DIPA/ IIPA,2
+Бельгия,BA Belgian Blond,2
+Бельгия,BA Sour Fruit Ale,2
+Бельгия,Brown ale,2
+Бельгия,Low Alcohol,2
+Бельгия,British Porter,2
+Бельгия,BA Belgian Trippel,1
+Бельгия,Smoked Porter,1
+Бельгия,Grisette,1
+Бельгия,White IPA,1
+Бельгия,Wild Quadrupel,1
+Бельгия,German Pils,1
+Бельгия,Strong Witbier / Blanche,1
+Бельгия,Dunkel Weizen,1
+Бельгия,Strong Sour Fruit Ale,1
+Бельгия,Barleywine,1
+Бельгия,American Wheat,1
+Бельгия,Poire / Perry,1
+Бельгия,Modern Hopped Lager,1
+Бельгия,International Golden Ale,1
+Бельгия,Herb Beer,1
+Великобритания,Cider,18
+Великобритания,Cider with Other Fruit,12
+Великобритания,Bitter,8
+Великобритания,Poire / Perry,5
+Великобритания,Dry Cider,5
+Великобритания,British Golden Ale,4
+Великобритания,Stout,3
+Великобритания,Low Alcohol,3
+Великобритания,IPA,2
+Великобритания,Extra Milk Stout,2
+Великобритания,British IPA,2
+Великобритания,Dry Stout,2
+Великобритания,British Porter,2
+Великобритания,Best Bitter,2
+Великобритания,British Brown Ale,2
+Великобритания,Sour IPA,1
+Великобритания,Mulled Cider,1
+Великобритания,Extra Special Bitter,1
+Великобритания,New England/Vermont IPA,1
+Великобритания,Wee heavy,1
+Великобритания,Brown ale,1
+Великобритания,Session IPA,1
+Великобритания,British Strong Ale,1
+Великобритания,Red Irish Ale,1
+Великобритания,Fruit beer,1
+Великобритания,Mild Ale,1
+Вьетнам,International Pale Lager,5
+Вьетнам,International Dark Lager,2
+Германия,Helles Weizen,80
+Германия,Munich Helles,62
+Германия,German Pils,52
+Германия,Low Alcohol,36
+Германия,Helles Kellerbier,21
+Германия,Dortmunder / Export,21
+Германия,Dunkel,16
+Германия,Schwarzbier,16
+Германия,International Pale Lager,15
+Германия,Dunkel Weizen,14
+Германия,Radler,12
+Германия,Cider,11
+Германия,Bock,9
+Германия,Marzen / Festbier,8
+Германия,Dunkel Kellerbier,7
+Германия,Cider with Other Fruit,6
+Германия,IPA,4
+Германия,American Light Lager,4
+Германия,Berliner Weisse,3
+Германия,Dry Cider,3
+Германия,Kristall Weizen,3
+Германия,Kolsch,3
+Германия,Wild Sour Ale,3
+Германия,Vienna Lager,3
+Германия,Smoked Marzen,2
+Германия,Fruited Berliner Weisse,2
+Германия,Набор,2
+Германия,Strong Sour Beer,2
+Германия,Doppelbock,2
+Германия,International Amber Lager,2
+Германия,BA Saison,1
+Германия,Weizenbock,1
+Германия,Dunkel Doppelbock,1
+Германия,Weizen Doppelbock,1
+Германия,Imperial Porter,1
+Германия,Saison,1
+Германия,Fruit beer,1
+Германия,Imperial Pilsner,1
+Германия,Eisbock,1
+Германия,Alcoholic Ginger Beer,1
+Германия,Dunkel Weizen Doppelbock,1
+Германия,APA,1
+Германия,Smoked Helles,1
+Германия,Modern Hopped Lager,1
+Германия,Hopfen Weizen,1
+Германия,Smoked Weizen,1
+Германия,International Golden Ale,1
+Германия,Tomato Gose,1
+Германия,Dry Stout,1
+Греция,International Pale Lager,3
+Греция,Low Alcohol,1
+Дания,International Pale Lager,1
+Ирландия,Wild Sour Fruit Ale,4
+Ирландия,Dry Stout,4
+Ирландия,IPA,3
+Ирландия,Red Irish Ale,3
+Ирландия,Cider,3
+Ирландия,DIPA/ IIPA,2
+Ирландия,Foreign Extra Stout,2
+Ирландия,APA,1
+Ирландия,Poire / Perry,1
+Ирландия,Graf,1
+Ирландия,Munich Helles,1
+Ирландия,Saison,1
+Ирландия,Dry Cider,1
+Ирландия,International Pale Lager,1
+Ирландия,British Golden Ale,1
+Ирландия,New England/Vermont IPA,1
+Ирландия,International Golden Ale,1
+Испания,Cider,13
+Испания,Cider with Other Fruit,10
+Испания,Dry Cider,10
+Испания,Low Alcohol,6
+Испания,Bock,4
+Испания,Marzen / Festbier,2
+Испания,Modern Hopped Lager,2
+Испания,German Pils,2
+Испания,APA,1
+Испания,BA Sour Ale,1
+Испания,BA Imperial Stout,1
+Испания,American Blond Ale,1
+Испания,Poire / Perry,1
+Испания,Malt Liquor,1
+Испания,Imperial Stout,1
+Испания,Amber Ale,1
+Испания,Fruit Gose,1
+Испания,IPA,1
+Испания,American Amber Ale,1
+Испания,Witbier / Blanche,1
+Испания,International Pale Lager,1
+Испания,Fruited Berliner Weisse,1
+Италия,International Pale Lager,11
+Италия,Old Ale,2
+Италия,BA Wild Sour Ale,1
+Италия,Strong Traditional Ale / Strong Farmhouse Ale,1
+Италия,Cider,1
+Италия,Doppelbock,1
+Италия,Wild Sour Ale,1
+Италия,American Light Lager,1
+Италия,Belgian Tripel,1
+Италия,Saison,1
+Италия,Witbier / Blanche,1
+Италия,Dortmunder / Export,1
+КРАФТОВОЕ ПИВО,IPA,11
+КРАФТОВОЕ ПИВО,TOMATO GOSE,6
+КРАФТОВОЕ ПИВО,DIPA/ IIPA,5
+КРАФТОВОЕ ПИВО,CHILI TOMATO GOSE,5
+КРАФТОВОЕ ПИВО,MILKSHAKE IPA/DIPA,4
+КРАФТОВОЕ ПИВО,APA,4
+КРАФТОВОЕ ПИВО,NEW ENGLAND/VERMONT IPA,3
+КРАФТОВОЕ ПИВО,NEW ENGLAND/VERMONT DIPA,2
+КРАФТОВОЕ ПИВО,NEW ENGLAND SESSION IPA/APA,2
+КРАФТОВОЕ ПИВО,IMPERIAL STOUT,2
+КРАФТОВОЕ ПИВО,SESSION IPA,2
+КРАФТОВОЕ ПИВО,MILK STOUT,1
+КРАФТОВОЕ ПИВО,BROWN ALE,1
+КРАФТОВОЕ ПИВО,FRUIT IPA,1
+КРАФТОВОЕ ПИВО,GOSE,1
+КРАФТОВОЕ ПИВО,SPICED IMPERIAL STOUT,1
+КРАФТОВОЕ ПИВО,STOUT,1
+КРАФТОВОЕ ПИВО,SMOKED CHILI IPA,1
+КРАФТОВОЕ ПИВО,IMPERIAL BALTIC PORTER,1
+КРАФТОВОЕ ПИВО,STRONG MELOMEL,1
+КРАФТОВОЕ ПИВО,STRONG SPICED ALE,1
+КРАФТОВОЕ ПИВО,SOUR ALE,1
+КРАФТОВОЕ ПИВО,SMOKED IMPERIAL STOUT,1
+Казахстан,Cider,7
+Казахстан,Dry Cider,1
+Канада,International Pale Lager,3
+Канада,American Light Lager,2
+Канада,Brown ale,1
+Канада,International Amber Lager,1
+Канада,Session IPA,1
+Канада,American Blond Ale,1
+Китай,International Pale Lager,12
+Китай,American Wheat,3
+Китай,American Light Lager,3
+Китай,Fruit beer,2
+Китай,Helles Weizen,2
+Китай,Cider with Other Fruit,1
+Китай,APA,1
+Китай,IPA,1
+Китай,Czech Dark Lager,1
+Китай,Witbier / Blanche,1
+Корея,International Pale Lager,3
+Латвия,Fruit beer,5
+Латвия,Vienna Lager,1
+Латвия,Braggot,1
+Латвия,Cider,1
+Латвия,Robust Porter,1
+Латвия,Cider with Other Fruit,1
+МЕДЫ,MELOMEL,2
+Мексика,International Pale Lager,1
+НЕФИЛЬТРОВАННОЕ ПИВО,HELLES KELLERBIER,3
+НЕФИЛЬТРОВАННОЕ ПИВО,INTERNATIONAL PALE LAGER,2
+НЕФИЛЬТРОВАННОЕ ПИВО,CZECH PILSENER,1
+НЕФИЛЬТРОВАННОЕ ПИВО,KOLSCH,1
+НЕФИЛЬТРОВАННОЕ ПИВО,PATERSBIER,1
+НЕФИЛЬТРОВАННОЕ ПИВО,IPA,1
+НЕФИЛЬТРОВАННОЕ ПИВО,MUNICH HELLES,1
+НЕФИЛЬТРОВАННОЕ ПИВО,DORTMUNDER / EXPORT,1
+НЕФИЛЬТРОВАННОЕ ПИВО,WEIZENBOCK,1
+НЕФИЛЬТРОВАННОЕ ПИВО,BELGIAN STRONG ALE,1
+НЕФИЛЬТРОВАННОЕ ПИВО,BELGIAN BLOND ALE,1
+Нидерланды,International Pale Lager,6
+Нидерланды,Low Alcohol,6
+Нидерланды,Belgian Dark Strong Ale,5
+Нидерланды,Strong Bright Lager,5
+Нидерланды,Witbier / Blanche,4
+Нидерланды,IPA,3
+Нидерланды,Belgian Tripel,3
+Нидерланды,Belgian Strong Ale,3
+Нидерланды,Spiced Beer,3
+Нидерланды,Belgian Blond Ale,2
+Нидерланды,Belgian Dubbel,2
+Нидерланды,American Wheat,1
+Нидерланды,American Light Lager,1
+Нидерланды,Belgian Dark Ale,1
+Нидерланды,New England/Vermont IPA,1
+Нидерланды,Robust Porter,1
+Нидерланды,"",1
+Нидерланды,Foreign Extra Stout,1
+Нидерланды,Imperial Stout,1
+ПШЕНИЧНОЕ ПИВО,WITBIER / BLANCHE,5
+ПШЕНИЧНОЕ ПИВО,HELLES WEIZEN,5
+ПШЕНИЧНОЕ ПИВО,AMERICAN WHEAT,2
+ПШЕНИЧНОЕ ПИВО,DUNKEL WEIZEN,1
+Польша,Belgian Blond Ale,1
+Россия,Sour Fruit Ale,184
+Россия,Cider,62
+Россия,Cider with Other Fruit,51
+Россия,IPA,43
+Россия,Dry Cider,30
+Россия,Chili Tomato Gose,29
+Россия,DIPA/ IIPA,24
+Россия,Fruit beer,23
+Россия,Melomel,23
+Россия,Tomato Gose,18
+Россия,Imperial Stout,16
+Россия,APA,16
+Россия,New England/Vermont IPA,15
+Россия,Low Alcohol,14
+Россия,Fruit Gose,14
+Россия,Milk Stout,13
+Россия,Milkshake IPA/DIPA,13
+Россия,New England/Vermont DIPA,13
+Россия,Strong Fruit Beer,10
+Россия,Fruited Berliner Weisse,10
+Россия,Strong Sour Fruit Ale,10
+Россия,International Pale Lager,9
+Россия,Modern Hopped Lager,8
+Россия,Helles Weizen,8
+Россия,Extra Milk Stout,8
+Россия,Stout,7
+Россия,Strong Melomel,6
+Россия,Mead,6
+Россия,Foreign Extra Stout,6
+Россия,Poire / Perry,6
+Россия,Czech Pilsener,5
+Россия,Berliner Weisse,5
+Россия,New England Session IPA/APA,5
+Россия,Gose,5
+Россия,Belgian Tripel,4
+Россия,Sour IPA,4
+Россия,Belgian Blond Ale,4
+Россия,Vegetable Gose,4
+Россия,Sour Ale,4
+Россия,Lemonade,3
+Россия,Robust Porter,3
+Россия,Cyser,3
+Россия,Barleywine,3
+Россия,Flemish Red Sour Ale,3
+Россия,Belgian Dubbel,3
+Россия,Fruit IPA,3
+Россия,Flavored Malt Beverages,3
+Россия,BA Imperial Stout,3
+Россия,Imperial Milk Stout,3
+Россия,German Pils,2
+Россия,Imperial Porter,2
+Россия,Strong Spiced Ale,2
+Россия,Metheglin,2
+Россия,Spiced Beer,2
+Россия,Mulled Cider,2
+Россия,Witbier / Blanche,2
+Россия,Chili Vegetable Gose,2
+Россия,BA Barleywine / Wheatwine,2
+Россия,Milkshake APA,2
+Россия,Wild Sour Fruit Ale,2
+Россия,Wee heavy,1
+Россия,Kolsch,1
+Россия,Imperial Pilsner,1
+Россия,Oatmeal Stout,1
+Россия,Strong Winter Warmer,1
+Россия,Coffee Stout,1
+Россия,Oud Bruin,1
+Россия,Extra Special Bitter,1
+Россия,Chili IPA,1
+Россия,Imperial Baltic Porter,1
+Россия,Radler,1
+Россия,American Wheat,1
+Россия,American Light Lager,1
+Россия,Fruit APA,1
+Россия,Smoked Chili IPA,1
+Россия,Munich Helles,1
+Россия,Helles Kellerbier,1
+Россия,Strong Traditional Ale / Strong Farmhouse Ale,1
+Россия,Marzen / Festbier,1
+Россия,Black DIPA,1
+Россия,Amber Ale,1
+Россия,Altbier,1
+Россия,Dortmunder / Export,1
+Россия,Belgian Dark Ale,1
+Россия,Black IPA,1
+Россия,Fruit DIPA,1
+Россия,Red IPA,1
+Россия,Belgian Dark Strong Ale,1
+Россия,Best Bitter,1
+Россия,Wild Sour Ale,1
+Россия,Dry Stout,1
+Россия,BA Sour Ale,1
+СИДР И ПУАРЕ,CIDER WITH OTHER FRUIT,4
+СИДР И ПУАРЕ,CIDER,4
+СИДР И ПУАРЕ,DRY CIDER,1
+США,BA Sour Fruit Ale,20
+США,Saison,5
+США,Wild Sour Fruit Ale,4
+США,Wild Sour Ale,3
+США,BA Sour Ale,3
+США,BA Wild Sour Ale,3
+США,Graf,2
+США,Methode Traditionnelle,2
+США,Sour Fruit Ale,2
+США,Flemish Red Sour Ale,1
+США,Fruit lambic,1
+США,Belgian Dubbel,1
+США,Traditional / Farmhouse,1
+США,Oud Bruin,1
+Словакия,Czech Premium Pale Lager,1
+Словакия,Schwarzbier,1
+ТЕМНОЕ ПИВО,BELGIAN DARK STRONG ALE,3
+ТЕМНОЕ ПИВО,DUNKEL,3
+ТЕМНОЕ ПИВО,FLEMISH RED SOUR ALE,2
+ТЕМНОЕ ПИВО,BELGIAN DUBBEL,2
+ТЕМНОЕ ПИВО,BROWN ALE,2
+ТЕМНОЕ ПИВО,CZECH DARK LAGER,1
+ТЕМНОЕ ПИВО,BITTER,1
+ТЕМНОЕ ПИВО,BELGIAN STRONG ALE,1
+ТЕМНОЕ ПИВО,RED ALE,1
+ТЕМНОЕ ПИВО,SCHWARZBIER,1
+ТЕМНОЕ ПИВО,STOUT,1
+ТЕМНОЕ ПИВО,INTERNATIONAL DARK LAGER,1
+ТЕМНОЕ ПИВО,DRY STOUT,1
+ТЕМНОЕ ПИВО,BRITISH PORTER,1
+Тайвань,Fruit beer,4
+Тайвань,Helles Weizen,1
+Тайланд,International Pale Lager,6
+ФИЛЬТРОВАННОЕ ПИВО,INTERNATIONAL PALE LAGER,14
+ФИЛЬТРОВАННОЕ ПИВО,MUNICH HELLES,6
+ФИЛЬТРОВАННОЕ ПИВО,CZECH PALE LAGER,4
+ФИЛЬТРОВАННОЕ ПИВО,CZECH PILSENER,4
+ФИЛЬТРОВАННОЕ ПИВО,MARZEN / FESTBIER,2
+ФИЛЬТРОВАННОЕ ПИВО,BELGIAN STRONG GOLDEN ALE,1
+ФИЛЬТРОВАННОЕ ПИВО,BOCK,1
+ФИЛЬТРОВАННОЕ ПИВО,FLEMISH RED SOUR ALE,1
+ФИЛЬТРОВАННОЕ ПИВО,BRITISH GOLDEN ALE,1
+ФИЛЬТРОВАННОЕ ПИВО,BRITISH IPA,1
+ФИЛЬТРОВАННОЕ ПИВО,BELGIAN BLOND ALE,1
+ФИЛЬТРОВАННОЕ ПИВО,BELGIAN STRONG ALE,1
+ФИЛЬТРОВАННОЕ ПИВО,GERMAN PILS,1
+ФИЛЬТРОВАННОЕ ПИВО,CZECH PREMIUM PALE LAGER,1
+ФРУКТОВОЕ ПИВО,SOUR FRUIT ALE,10
+ФРУКТОВОЕ ПИВО,FRUIT BEER,4
+ФРУКТОВОЕ ПИВО,STRONG FRUIT BEER,2
+ФРУКТОВОЕ ПИВО,KRIEK LAMBIC,2
+ФРУКТОВОЕ ПИВО,STRONG SOUR FRUIT ALE,1
+ФРУКТОВОЕ ПИВО,FRUIT GOSE,1
+Финляндия,International Pale Lager,1
+Франция,Cider,65
+Франция,Dry Cider,48
+Франция,Poire / Perry,20
+Франция,Cider & Poiree,5
+Франция,Traditional / Farmhouse,5
+Франция,Fruit beer,4
+Франция,Belgian Blond Ale,3
+Франция,Cider with Other Fruit,3
+Франция,Wild Sour Fruit Ale,2
+Франция,International Pale Lager,2
+Франция,Belgian Dark Ale,1
+Франция,Belgian Dark Strong Ale,1
+Франция,Low Alcohol,1
+Франция,Grape Ale,1
+Франция,Mulled Cider,1
+Чехия,Czech Pale Lager,25
+Чехия,Czech Premium Pale Lager,18
+Чехия,Czech Dark Lager,14
+Чехия,Czech Pilsener,11
+Чехия,Wild Sour Ale,10
+Чехия,International Pale Lager,5
+Чехия,Low Alcohol,4
+Чехия,Fruit lambic,3
+Чехия,Imperial Stout,3
+Чехия,IPA,3
+Чехия,Helles Weizen,2
+Чехия,Wild Sour Fruit Ale,2
+Чехия,Gueuze / Geuze,2
+Чехия,Fruited Berliner Weisse,2
+Чехия,Czech Amber Lager,2
+Чехия,Набор,1
+Чехия,American Light Lager,1
+Чехия,American Blond Ale,1
+Чехия,APA,1
+Чехия,International Dark Lager,1
+Чехия,New England Session IPA/APA,1
+Чехия,"",1
+Чехия,Extra Special Bitter,1
+Чехия,Braggot,1
+Чехия,Robust Porter,1
+Чехия,New England/Vermont IPA,1
+Чехия,Modern Hopped Lager,1
+Чехия,Melomel,1
+Чехия,Bock,1
+Чехия,Stout,1
+Чехия,Munich Helles,1
+Чехия,Witbier / Blanche,1
+Чехия,Belgian Tripel,1
+Чехия,Imperial Pilsner,1
+Чехия,Imperial Baltic Porter,1
+Швейцария,BA Wild Sour Ale,8
+Швейцария,BA Sour Ale,4
+Швейцария,Sour Fruit Ale,2
+Швейцария,BA Sour Fruit Ale,2
+Швеция,Cider with Other Fruit,5
+Швеция,Sour Fruit Ale,5
+Швеция,Wild Sour Ale,3
+Швеция,BA Sour Fruit Ale,3
+Швеция,Saison,2
+Швеция,BA Sour Ale,2
+Швеция,Wild Sour Fruit Ale,1
+Швеция,Fruit Gose,1
+Шотландия,Saison,1
+Южная Осетия,International Pale Lager,2
+Южная Осетия,International Dark Lager,1

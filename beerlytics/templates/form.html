@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="grid grid-cols-9">
+        {% for style in styles %}
+            <div class="border font-semibold p-2">{{ style }}</div>
+            {% for brewery in breweries_by_style[style] %}
+                <div class="border text-center p-2">
+                    {% if brewery %}
+                        <div class="flex flex-col h-full space-y-2 text-sm">
+
+                            <div class="grow">
+                                <a href="/brewery?id={{ brewery.id }}"
+                                   class="underline text-blue-600 hover:text-blue-700">
+
+                                    <div class="">{{ brewery.title }} </div>
+                                </a>
+                            </div>
+                            <div class="border-t pt-1">{{ brewery.sort_label | safe }}</div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock %}

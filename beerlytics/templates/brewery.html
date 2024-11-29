@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h1 class="text-2xl font-bold mx-2 my-4"><a class="underline text-blue-600 hover:text-blue-700"
+                                                href="{{ brewery['url'] }}">
+        {{ brewery['title'] }}
+    </a></h1>
+
+    <div class="grid grid-cols-9">
+        {% for style, beers in beers_by_style %}
+            <div class="border font-semibold p-2">{{ style }}</div>
+            {% for beer in beers %}
+                <div class="border text-center p-2">
+                    {% if beer %}
+                        <div class="flex flex-col h-full space-y-2 text-sm">
+
+                            <div class="grow">
+                                <a href="{{ beer['link'] }}" target="_blank"
+                                   class="underline text-blue-600 hover:text-blue-700">
+
+                                    <div class="">{{ beer['title'] }} </div>
+                                </a>
+                            </div>
+                            <div class="border-t pt-1">{{ beer['rating'] }}<br>ratings: {{ beer['ratingAmount'] }}</div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock %}
