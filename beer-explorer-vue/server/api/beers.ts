@@ -5,7 +5,7 @@ export default defineEventHandler(() => {
   const db = new Database('C:\\Users\\admin\\PycharmProjects\\beer-board\\beer.db')
   
   const beers = db.prepare(`
-    SELECT brewery, name, rating, url 
+    SELECT * 
     FROM beer_my_untappd_beers
   `).all()
   
