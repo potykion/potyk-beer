@@ -177,7 +177,7 @@ const selectedInsideGroupSorters = ref<string[]>(["rating"])
         <v-select
             v-model="selectedInsideGroupSorters"
             chips
-            label="Сортировка внутри гр��ппы"
+            label="Сортировка внутри грппы"
             :items="insideGroupSorters"
             multiple
             variant="outlined"
@@ -190,7 +190,8 @@ const selectedInsideGroupSorters = ref<string[]>(["rating"])
       <template v-for="(groupContent, groupName) in groupedBeers" :key="groupName">
         <!-- Заголовок первого уровня -->
         <v-list-subheader v-if="selectedGroups.length > 0 && groupName !== 'ungrouped'">
-          {{ groupName }} ({{ groupContent.length }})
+          {{ groupName }} ({{ isBeersArray(groupContent) ? groupContent.length : 
+            Object.values(groupContent).reduce((sum, arr) => sum + arr.length, 0) }})
         </v-list-subheader>
 
         <!-- Если это финальная группа с пивом -->
