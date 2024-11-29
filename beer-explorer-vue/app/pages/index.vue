@@ -29,29 +29,55 @@ type GroupedBeers = {
   }
 }
 
-// Функция сортировки пива внутри группы
-const sortBeers = (beers: Beer[]): Beer[] => {
-  if (!selectedInsideGroupSorters.value.length) return beers
+const groupSorters = [
+  {
+    title: "По количеству",
+    value: "amount",
+  },
+  {
+    title: "По названию",
+    value: "name",
+  },
+];
 
-  const sortType = selectedInsideGroupSorters.value[0]
+const selectedGroupSorters = ref<string>("name")
+
+const insideGroupSorters = [
+  {
+    title: "По рейтингу",
+    value: "rating",
+  },
+  {
+    title: "По названию",
+    value: "name",
+  }
+];
+
+const selectedInsideGroupSorters = ref<string>("rating")
+
+// Обновляем функцию сортировки пива внутри группы
+const sortBeers = (beers: Beer[]): Beer[] => {
+  if (!selectedInsideGroupSorters.value) return beers
+
+  const sortType = selectedInsideGroupSorters.value
 
   return [...beers].sort((a, b) => {
     if (sortType === 'rating') {
-      return b.rating - a.rating // По убыванию рейтинга
+      return b.rating - a.rating
     } else {
-      return a.name.localeCompare(b.name) // По названию
+      return a.name.localeCompare(b.name)
     }
   })
 }
 
 // Обновляем функцию сортировки групп
 const sortGroups = (groups: GroupedBeers): GroupedBeers => {
-  if (!selectedGroupSorters.value.length && !selectedInsideGroupSorters.value.length) return groups
+  if (!selectedGroupSorters.value && !selectedInsideGroupSorters.value) return groups
 
   const entries = Object.entries(groups)
   if (entries.length <= 1) return groups
 
-  const sortType = selectedGroupSorters.value[0]
+  const sortType = selectedGroupSorters.value
 
   // Сортировка групп первого уровня
   const sortedEntries = entries.sort((a, b) => {
@@ -145,35 +171,6 @@ const isBeersArray = (value: Beer[] | { [key: string]: Beer[] }): value is Beer[
   return Array.isArray(value)
 }
 
-
-const groupSorters = [
-  {
-    title: "По количеству",
-    value: "amount",
-  },
-  {
-    title: "По названию",
-    value: "name",
-  },
-
-];
-
-const selectedGroupSorters = ref<string[]>(["name"])
-
-const insideGroupSorters = [
-  {
-    title: "По рейтингу",
-    value: "rating",
-  },
-  {
-    title: "По названию",
-    value: "name",
-  }
-];
-
-const selectedInsideGroupSorters = ref<string[]>(["rating"])
-
-
 </script>
 
 <template>
@@ -197,28 +194,22 @@ const selectedInsideGroupSorters = ref<string[]>(["rating"])
       <v-col>
         <v-select
             v-model="selectedGroupSorters"
-            chips
             label="Сортировка групп"
             :items="groupSorters"
-            multiple
             variant="outlined"
             density="compact"
             hide-details
-
         ></v-select>
       </v-col>
 
       <v-col>
         <v-select
             v-model="selectedInsideGroupSorters"
-            chips
             label="Сортировка внутри группы"
             :items="insideGroupSorters"
-            multiple
             variant="outlined"
             density="compact"
             hide-details
-
         ></v-select>
       </v-col>
     </v-row>
