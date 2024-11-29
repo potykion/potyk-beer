@@ -32,9 +32,9 @@ type GroupedBeers = {
 // Функция сортировки пива внутри группы
 const sortBeers = (beers: Beer[]): Beer[] => {
   if (!selectedInsideGroupSorters.value.length) return beers
-  
+
   const sortType = selectedInsideGroupSorters.value[0]
-  
+
   return [...beers].sort((a, b) => {
     if (sortType === 'rating') {
       return b.rating - a.rating // По убыванию рейтинга
@@ -47,17 +47,17 @@ const sortBeers = (beers: Beer[]): Beer[] => {
 // Обновляем функцию сортировки групп
 const sortGroups = (groups: GroupedBeers): GroupedBeers => {
   if (!selectedGroupSorters.value.length && !selectedInsideGroupSorters.value.length) return groups
-  
+
   const entries = Object.entries(groups)
   if (entries.length <= 1) return groups
-  
+
   const sortType = selectedGroupSorters.value[0]
-  
+
   // Сортировка групп первого уровня
   const sortedEntries = entries.sort((a, b) => {
     if (a[0] === 'ungrouped') return 1
     if (b[0] === 'ungrouped') return -1
-    
+
     if (sortType === 'amount') {
       const aSize = isBeersArray(a[1]) ? a[1].length : Object.values(a[1]).reduce((sum, arr) => sum + arr.length, 0)
       const bSize = isBeersArray(b[1]) ? b[1].length : Object.values(b[1]).reduce((sum, arr) => sum + arr.length, 0)
@@ -66,7 +66,7 @@ const sortGroups = (groups: GroupedBeers): GroupedBeers => {
       return a[0].localeCompare(b[0])
     }
   })
-  
+
   // Сортировка подгрупп и их содержимого
   const sortedGroups = sortedEntries.map(([key, value]) => {
     if (isBeersArray(value)) {
@@ -88,7 +88,7 @@ const sortGroups = (groups: GroupedBeers): GroupedBeers => {
       return [key, Object.fromEntries(sortedSubEntries)]
     }
   })
-  
+
   return Object.fromEntries(sortedGroups)
 }
 
@@ -97,7 +97,7 @@ const simplifyStyles = ref(true)
 // Создаем вычисляемое свойство для обработанного списка пива
 const processedBeers = computed(() => {
   if (!beers.value) return []
-  
+
   return beers.value.map(beer => ({
     ...beer,
     style: simplifyStyles.value ? beer.style.split(' - ')[0] : beer.style
@@ -178,9 +178,8 @@ const selectedInsideGroupSorters = ref<string[]>(["rating"])
 
 <template>
   <v-container>
-    <h1>Пивко</h1>
-
-    <v-row class="pt-5" dense>
+    <h1 class="mb-5">Пивко</h1>
+    <v-row  dense>
       <v-col>
         <v-select
             v-model="selectedGroups"
@@ -191,6 +190,7 @@ const selectedInsideGroupSorters = ref<string[]>(["rating"])
             variant="outlined"
             density="compact"
             :rules="[v => v.length <= 2 || 'Максимум 2 группировки']"
+            hide-details
         ></v-select>
       </v-col>
 
@@ -203,6 +203,8 @@ const selectedInsideGroupSorters = ref<string[]>(["rating"])
             multiple
             variant="outlined"
             density="compact"
+            hide-details
+
         ></v-select>
       </v-col>
 
@@ -215,6 +217,8 @@ const selectedInsideGroupSorters = ref<string[]>(["rating"])
             multiple
             variant="outlined"
             density="compact"
+            hide-details
+
         ></v-select>
       </v-col>
     </v-row>
@@ -223,10 +227,9 @@ const selectedInsideGroupSorters = ref<string[]>(["rating"])
       <v-col>
         <v-checkbox
             v-model="simplifyStyles"
-            label="Упрощенные стили"
+            label='Упрощенные стили ("Barleywine - American" → "Barleywine")'
             density="compact"
-            hint="Barleywine - American > Barleywine"
-            persistent-hint
+            hide-details
         ></v-checkbox>
       </v-col>
     </v-row>
