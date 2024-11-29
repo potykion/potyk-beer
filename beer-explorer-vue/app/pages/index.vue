@@ -92,16 +92,29 @@ const sortGroups = (groups: GroupedBeers): GroupedBeers => {
   return Object.fromEntries(sortedGroups)
 }
 
-// Обновляем вычисляемое свойство groupedBeers
+const simplifyStyles = ref(false)
+
+// Создаем вычисляемое свойство для обработанного списка пива
+const processedBeers = computed(() => {
+  if (!beers.value) return []
+  
+  return beers.value.map(beer => ({
+    ...beer,
+    style: simplifyStyles.value ? beer.style.split(' - ')[0] : beer.style
+  }))
+})
+
+// Обновляем вычисляемое свойство groupedBeers, 
+// заменяем использование beers.value на processedBeers.value
 const groupedBeers = computed(() => {
-  if (!beers.value || selectedGroups.value.length === 0) {
-    return {ungrouped: beers.value || []}
+  if (!processedBeers.value || selectedGroups.value.length === 0) {
+    return {ungrouped: processedBeers.value || []}
   }
 
   const result: GroupedBeers = {}
   const activeGroups = selectedGroups.value.slice(0, 2)
 
-  beers.value.forEach((beer) => {
+  processedBeers.value.forEach((beer) => {
     const firstKey = beer[activeGroups[0] as keyof Beer] as string
 
     if (activeGroups.length === 1) {
@@ -124,7 +137,6 @@ const groupedBeers = computed(() => {
     }
   })
 
-  // Применяем сортировку групп
   return sortGroups(result)
 })
 
@@ -168,7 +180,7 @@ const selectedInsideGroupSorters = ref<string[]>(["rating"])
   <v-container>
     <h1>Пивко</h1>
 
-    <v-row class="pt-5">
+    <v-row class="pt-5" dense>
       <v-col>
         <v-select
             v-model="selectedGroups"
@@ -204,6 +216,16 @@ const selectedInsideGroupSorters = ref<string[]>(["rating"])
             variant="outlined"
             density="compact"
         ></v-select>
+      </v-col>
+    </v-row>
+
+    <v-row dense>
+      <v-col>
+        <v-checkbox
+            v-model="simplifyStyles"
+            label="Упрощенные стили"
+            density="compact"
+        ></v-checkbox>
       </v-col>
     </v-row>
 
