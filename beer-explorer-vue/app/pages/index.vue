@@ -92,7 +92,7 @@ const sortGroups = (groups: GroupedBeers): GroupedBeers => {
   return Object.fromEntries(sortedGroups)
 }
 
-const simplifyStyles = ref(false)
+const simplifyStyles = ref(true)
 
 // Создаем вычисляемое свойство для обработанного списка пива
 const processedBeers = computed(() => {
@@ -104,11 +104,11 @@ const processedBeers = computed(() => {
   }))
 })
 
-// Обновляем вычисляемое свойство groupedBeers, 
-// заменяем использование beers.value на processedBeers.value
+// Обновляем вычисляемое свойство groupedBeers
 const groupedBeers = computed(() => {
   if (!processedBeers.value || selectedGroups.value.length === 0) {
-    return {ungrouped: processedBeers.value || []}
+    // Применяем сортировку к негруппированному списку
+    return {ungrouped: sortBeers(processedBeers.value || [])}
   }
 
   const result: GroupedBeers = {}
@@ -225,6 +225,8 @@ const selectedInsideGroupSorters = ref<string[]>(["rating"])
             v-model="simplifyStyles"
             label="Упрощенные стили"
             density="compact"
+            hint="Barleywine - American > Barleywine"
+            persistent-hint
         ></v-checkbox>
       </v-col>
     </v-row>
