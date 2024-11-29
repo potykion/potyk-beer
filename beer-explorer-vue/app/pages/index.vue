@@ -29,9 +29,24 @@ type GroupedBeers = {
   }
 }
 
-// Функция сортировки групп
+// Функция сортировки пива внутри группы
+const sortBeers = (beers: Beer[]): Beer[] => {
+  if (!selectedInsideGroupSorters.value.length) return beers
+  
+  const sortType = selectedInsideGroupSorters.value[0]
+  
+  return [...beers].sort((a, b) => {
+    if (sortType === 'rating') {
+      return b.rating - a.rating // По убыванию рейтинга
+    } else {
+      return a.name.localeCompare(b.name) // По названию
+    }
+  })
+}
+
+// Обновляем функцию сортировки групп
 const sortGroups = (groups: GroupedBeers): GroupedBeers => {
-  if (!selectedGroupSorters.value.length) return groups
+  if (!selectedGroupSorters.value.length && !selectedInsideGroupSorters.value.length) return groups
   
   const entries = Object.entries(groups)
   if (entries.length <= 1) return groups
@@ -52,9 +67,13 @@ const sortGroups = (groups: GroupedBeers): GroupedBeers => {
     }
   })
   
-  // Сортировка подгрупп
+  // Сортировка подгрупп и их содержимого
   const sortedGroups = sortedEntries.map(([key, value]) => {
-    if (!isBeersArray(value)) {
+    if (isBeersArray(value)) {
+      // Если это конечная группа - сортируем пиво
+      return [key, sortBeers(value)]
+    } else {
+      // Если это группа с подгруппами
       const subEntries = Object.entries(value)
       const sortedSubEntries = subEntries.sort((a, b) => {
         if (sortType === 'amount') {
@@ -62,10 +81,12 @@ const sortGroups = (groups: GroupedBeers): GroupedBeers => {
         } else {
           return a[0].localeCompare(b[0])
         }
+      }).map(([subKey, subValue]) => {
+        // Сортируем пиво внутри каждой подгруппы
+        return [subKey, sortBeers(subValue)]
       })
       return [key, Object.fromEntries(sortedSubEntries)]
     }
-    return [key, value]
   })
   
   return Object.fromEntries(sortedGroups)
@@ -125,7 +146,7 @@ const groupSorters = [
 
 ];
 
-const selectedGroupSorters = ref<string[]>(["amount"])
+const selectedGroupSorters = ref<string[]>(["name"])
 
 const insideGroupSorters = [
   {
