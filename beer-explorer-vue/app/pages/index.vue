@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import BeerListItem from '~/components/BeerListItem.vue'
 
+
 interface Beer {
   brewery: string
   name: string
@@ -20,7 +21,10 @@ const groupers = [
     title: 'Пивоварня',
     value: 'brewery',
   },
-
+  {
+    title: 'Страна',
+    value: 'country',
+  },
 ]
 
 const selectedGroups = ref<string[]>(['style'])
@@ -178,7 +182,7 @@ const isBeersArray = (value: Beer[] | { [key: string]: Beer[] }): value is Beer[
 <template>
   <v-container>
     <h1 class="mb-5">Пивко</h1>
-    <v-row  dense>
+    <v-row dense>
       <v-col>
         <v-select
             v-model="selectedGroups"
@@ -247,7 +251,7 @@ const isBeersArray = (value: Beer[] | { [key: string]: Beer[] }): value is Beer[
                   v-for="beer in groupContent"
                   :key="`${beer.brewery}-${beer.name}`"
                   :beer="beer"
-                    
+
 
               />
             </template>
@@ -267,7 +271,7 @@ const isBeersArray = (value: Beer[] | { [key: string]: Beer[] }): value is Beer[
                     v-for="beer in subGroupBeers"
                     :key="`${beer.brewery}-${beer.name}`"
                     :beer="beer"
-                    
+
                 />
               </v-list-group>
             </template>
@@ -280,7 +284,7 @@ const isBeersArray = (value: Beer[] | { [key: string]: Beer[] }): value is Beer[
               v-for="beer in groupContent"
               :key="`${beer.brewery}-${beer.name}`"
               :beer="beer"
-              
+
           />
         </template>
       </template>
