@@ -13,21 +13,12 @@ interface Beer {
 const {data: beers} = await useFetch<Beer[]>('/api/beers')
 
 const groupers = [
-  {
-    title: 'Стиль',
-    value: 'style',
-  },
-  {
-    title: 'Пивоварня',
-    value: 'brewery',
-  },
-  {
-    title: 'Страна',
-    value: 'country',
-  },
+  {title: 'Пивоварня', value: 'brewery'},
+  {title: 'Стиль', value: 'style'},
+  {title: 'Страна', value: 'country'},
 ]
 
-const selectedGroups = ref<string[]>(['style'])
+const selectedGroups = ref<string[]>(['brewery'])
 
 type GroupedBeers = {
   [key: string]: Beer[] | {
@@ -36,27 +27,15 @@ type GroupedBeers = {
 }
 
 const groupSorters = [
-  {
-    title: "По количеству",
-    value: "amount",
-  },
-  {
-    title: "По названию",
-    value: "name",
-  },
+  {title: "По количеству", value: "amount"},
+  {title: "По названию", value: "name"},
 ];
 
 const selectedGroupSorters = ref<string>("name")
 
 const insideGroupSorters = [
-  {
-    title: "По рейтингу",
-    value: "rating",
-  },
-  {
-    title: "По названию",
-    value: "name",
-  }
+  {title: "По рейтингу", value: "rating"},
+  {title: "По названию", value: "name"}
 ];
 
 const selectedInsideGroupSorters = ref<string>("rating")
