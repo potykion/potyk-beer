@@ -49,10 +49,71 @@ const getPricesForBeerAndVenue = (beerKey: string, venue: string) => {
     .map(beer => `${beer.volume} - ${beer.price}₽`)
     .join('<br>') || ''
 }
+
+// Получаем уникальные пивоварни
+const uniqueBreweries = computed(() => {
+  const breweries = new Set<string>()
+  beerPrices.value?.forEach(beer => breweries.add(beer.brewery))
+  return Array.from(breweries).map(brewery => ({
+    title: brewery,
+    value: brewery,
+  }))
+})
+
+// Состояние выбранных пивоварен
+const selectedBreweries = ref<string[]>([])
+
+// Добавляем состояние для текстового поиска
+const searchQuery = ref('')
+
+// Обновляем фильтрацию с учетом текстового поиска
+const filteredBeers = computed(() => {
+  let filtered = uniqueBeers.value
+
+  // Фильтрация по выбранным пивоварням
+  if (selectedBreweries.value.length) {
+    filtered = filtered.filter(beer => 
+      selectedBreweries.value.includes(beer.brewery)
+    )
+  }
+
+  // Фильтрация по текстовому поиску
+  if (searchQuery.value) {
+    const query = searchQuery.value.toLowerCase()
+    filtered = filtered.filter(beer =>
+      beer.name.toLowerCase().includes(query) ||
+      beer.brewery.toLowerCase().includes(query)
+    )
+  }
+
+  return filtered
+})
 </script>
 
 <template>
   <div class="prices-container">
+    <div class="search-container">
+      <div class="search-controls">
+        <v-text-field
+          v-model="searchQuery"
+          label="Поиск по названию или пивоварне"
+          variant="outlined"
+          class="search-field"
+          clearable
+          density="comfortable"
+        />
+        <v-autocomplete
+          v-model="selectedBreweries"
+          :items="uniqueBreweries"
+          chips
+          label="Выберите пивоварни"
+          multiple
+          variant="outlined"
+          class="brewery-select"
+        />
+      </div>
+    </div>
+    
     <table class="prices-table">
       <thead>
         <tr>
@@ -61,7 +122,7 @@ const getPricesForBeerAndVenue = (beerKey: string, venue: string) => {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="beer in uniqueBeers" :key="beer.key">
+        <tr v-for="beer in filteredBeers" :key="beer.key">
           <td class="beer-name">
             <a :href="beer.url" target="_blank" v-html="beer.displayName"></a>
           </td>
@@ -79,6 +140,31 @@ const getPricesForBeerAndVenue = (beerKey: string, venue: string) => {
   overflow-x: auto;
   position: relative;
   max-height: calc(100vh - 2rem);  /* Ограничиваем высоту контейнера */
+}
+
+.search-container {
+  margin-bottom: 1rem;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 2;
+  padding: 1rem 0;
+}
+
+.search-controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.search-field {
+  max-width: 300px;
+  flex: 1;
+}
+
+.brewery-select {
+  max-width: 600px;
+  flex: 2;
 }
 
 .prices-table {
