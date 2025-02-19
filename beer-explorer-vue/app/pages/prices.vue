@@ -66,7 +66,21 @@ const selectedBreweries = ref<string[]>([])
 // Добавляем состояние для текстового поиска
 const searchQuery = ref('')
 
-// Обновляем фильтрацию с учетом текстового поиска
+// Состояние выбранных магазинов
+const selectedVenues = ref<string[]>([])
+
+// Состояние чекбокса пересечений
+const showIntersectionsOnly = ref(false)
+
+// Обновляем список отображаемых магазинов
+const displayedVenues = computed(() => {
+  if (selectedVenues.value.length === 0) {
+    return uniqueVenues.value
+  }
+  return selectedVenues.value
+})
+
+// Обновляем фильтрацию с учетом магазинов и пересечений
 const filteredBeers = computed(() => {
   let filtered = uniqueBeers.value
 
@@ -84,6 +98,33 @@ const filteredBeers = computed(() => {
       beer.name.toLowerCase().includes(query) ||
       beer.brewery.toLowerCase().includes(query)
     )
+  }
+
+  // Фильтрация по выбранным магазинам
+  if (selectedVenues.value.length > 0) {
+    filtered = filtered.filter(beer => {
+      const [name, brewery] = beer.key.split('\n')
+      
+      if (showIntersectionsOnly.value) {
+        // Показывать только пиво, которое есть во всех выбранных магазинах
+        return selectedVenues.value.every(venue => {
+          return beerPrices.value?.some(price => 
+            price.name === name && 
+            price.brewery === brewery && 
+            price.venue === venue
+          )
+        })
+      } else {
+        // Показывать пиво, которое есть хотя бы в одном из выбранных магазинов
+        return selectedVenues.value.some(venue => {
+          return beerPrices.value?.some(price => 
+            price.name === name && 
+            price.brewery === brewery && 
+            price.venue === venue
+          )
+        })
+      }
+    })
   }
 
   return filtered
@@ -112,13 +153,30 @@ const filteredBeers = computed(() => {
           class="brewery-select"
         />
       </div>
+      <div class="venue-controls">
+        <v-autocomplete
+          v-model="selectedVenues"
+          :items="uniqueVenues"
+          chips
+          label="Выберите магазины"
+          multiple
+          variant="outlined"
+          class="venue-select"
+        />
+        <v-checkbox
+          v-model="showIntersectionsOnly"
+          label="Только пересечения"
+          :disabled="selectedVenues.length <= 1"
+          density="comfortable"
+        />
+      </div>
     </div>
     
     <table class="prices-table">
       <thead>
         <tr>
           <th>Пиво</th>
-          <th v-for="venue in uniqueVenues" :key="venue">{{ venue }}</th>
+          <th v-for="venue in displayedVenues" :key="venue">{{ venue }}</th>
         </tr>
       </thead>
       <tbody>
@@ -126,7 +184,7 @@ const filteredBeers = computed(() => {
           <td class="beer-name">
             <a :href="beer.url" target="_blank" v-html="beer.displayName"></a>
           </td>
-          <td v-for="venue in uniqueVenues" :key="venue" v-html="getPricesForBeerAndVenue(beer.key, venue)">
+          <td v-for="venue in displayedVenues" :key="venue" v-html="getPricesForBeerAndVenue(beer.key, venue)">
           </td>
         </tr>
       </tbody>
@@ -149,6 +207,7 @@ const filteredBeers = computed(() => {
   background-color: white;
   z-index: 2;
   padding: 1rem 0;
+  border-bottom: 1px solid #eee;
 }
 
 .search-controls {
@@ -165,6 +224,18 @@ const filteredBeers = computed(() => {
 .brewery-select {
   max-width: 600px;
   flex: 2;
+}
+
+.venue-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.venue-select {
+  max-width: 600px;
+  flex: 1;
 }
 
 .prices-table {
