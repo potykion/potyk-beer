@@ -253,15 +253,12 @@ const getPricesForBeerAndVenue = (beerKey: string, venue: string) => {
   padding: 1rem;
   overflow-x: auto;
   position: relative;
-  max-height: calc(100vh - 2rem);  /* Ограничиваем высоту контейнера */
+  max-height: calc(100vh - 2rem);
 }
 
 .search-container {
   margin-bottom: 1rem;
-  position: sticky;
-  top: 0;
   background-color: white;
-  z-index: 2;
   padding: 1rem 0;
   border-bottom: 1px solid #eee;
 }
@@ -318,10 +315,9 @@ const getPricesForBeerAndVenue = (beerKey: string, venue: string) => {
 
 .prices-table th {
   background-color: #f2f2f2;
-  position: sticky;  /* Делаем заголовки фиксированными */
+  position: sticky;
   top: 0;
-  z-index: 1;  /* Чтобы заголовки были поверх содержимого при прокрутке */
-  /* Добавляем тень для визуального отделения */
+  z-index: 1;
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
 }
 
