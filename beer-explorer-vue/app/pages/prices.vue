@@ -181,51 +181,68 @@ const getPricesForBeerAndVenue = (beerKey: string, venue: string) => {
 <template>
   <div class="prices-container">
     <div class="search-container">
-      <div class="search-controls">
-        <v-text-field
-          v-model="searchQuery"
-          label="Поиск по названию или пивоварне"
-          variant="outlined"
-          class="search-field"
-          clearable
-          density="comfortable"
-        />
-        <v-autocomplete
-          v-model="selectedBreweries"
-          :items="uniqueBreweries"
-          chips
-          label="Выберите пивоварни"
-          multiple
-          variant="outlined"
-          class="brewery-select"
-        />
-      </div>
-      <div class="venue-controls">
-        <v-autocomplete
-          v-model="selectedVenues"
-          :items="uniqueVenues"
-          chips
-          label="Выберите магазины"
-          multiple
-          variant="outlined"
-          class="venue-select"
-        />
-        <v-select
-          v-model="selectedServingTypes"
-          :items="servingTypes"
-          chips
-          label="Тип подачи"
-          multiple
-          variant="outlined"
-          class="serving-select"
-        />
-        <v-checkbox
-          v-model="showIntersectionsOnly"
-          label="Только пересечения"
-          :disabled="selectedVenues.length <= 1"
-          density="comfortable"
-        />
-      </div>
+      <v-row>
+        <v-col cols="12">
+          <v-text-field
+            v-model="searchQuery"
+            label="Поиск по названию или пивоварне"
+            variant="outlined"
+            clearable
+            density="comfortable"
+          />
+        </v-col>
+      </v-row>
+      
+      <v-row>
+       
+        <v-col cols="4">
+          <div>
+            <v-autocomplete
+              v-model="selectedVenues"
+              :items="uniqueVenues"
+              chips
+              label="Выберите магазины"
+              multiple
+              variant="outlined"
+              hide-details
+              clearable
+            />
+            <v-checkbox
+              v-if="selectedVenues.length > 1"
+              v-model="showIntersectionsOnly"
+              label="Только пересечения"
+              :disabled="selectedVenues.length <= 1"
+              density="comfortable"
+              class="mt-2"
+            />
+          </div>
+        </v-col>
+        
+       
+
+        <v-col cols="4">
+          <v-autocomplete
+            v-model="selectedBreweries"
+            :items="uniqueBreweries"
+            chips
+            label="Выберите пивоварни"
+            multiple
+            variant="outlined"
+            clearable
+          />
+        </v-col>
+        
+        <v-col cols="4">
+          <v-select
+            v-model="selectedServingTypes"
+            :items="servingTypes"
+            chips
+            label="Тип подачи"
+            multiple
+            variant="outlined"
+          />
+        </v-col>
+      </v-row>
     </div>
     
     <table class="prices-table">
@@ -261,39 +278,6 @@ const getPricesForBeerAndVenue = (beerKey: string, venue: string) => {
   background-color: white;
   padding: 1rem 0;
   border-bottom: 1px solid #eee;
-}
-
-.search-controls {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.search-field {
-  max-width: 300px;
-  flex: 1;
-}
-
-.brewery-select {
-  max-width: 600px;
-  flex: 2;
-}
-
-.venue-controls {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin-top: 1rem;
-  flex-wrap: wrap;
-}
-
-.venue-select {
-  max-width: 600px;
-  flex: 1;
-}
-
-.serving-select {
-  max-width: 300px;
 }
 
 .prices-table {
