@@ -38,18 +38,6 @@ const uniqueVenues = computed(() => {
   return Array.from(venues)
 })
 
-const getPricesForBeerAndVenue = (beerKey: string, venue: string) => {
-  const [name, brewery] = beerKey.split('\n')
-  return beerPrices.value
-    ?.filter(beer => 
-      beer.name === name && 
-      beer.brewery === brewery && 
-      beer.venue === venue
-    )
-    .map(beer => `${beer.volume} - ${beer.price}₽`)
-    .join('<br>') || ''
-}
-
 // Получаем уникальные пивоварни
 const uniqueBreweries = computed(() => {
   const breweries = new Set<string>()
@@ -72,6 +60,36 @@ const selectedVenues = ref<string[]>([])
 // Состояние чекбокса пересечений
 const showIntersectionsOnly = ref(false)
 
+// Обновляем типы подачи
+const servingTypes = [
+  { title: 'Банки/Бутылки', value: 'packaged' },
+  { title: 'Розлив', value: 'draft' },
+  { title: 'Сэмплы', value: 'sample' },
+]
+
+// Обновляем функцию определения типа подачи
+const getServingType = (volume: string): string => {
+  const volumeLower = volume.toLowerCase()
+  
+  // Проверяем сэмплы
+  if (volumeLower.includes('sample') || volumeLower.includes('cl')) {
+    return 'sample'
+  }
+  
+  // Проверяем бутылки/банки
+  if (volumeLower.includes('bottle') || 
+      volumeLower.includes('can') || 
+      volumeLower.includes('btl')) {
+    return 'packaged'
+  }
+  
+  // Все остальное считаем розливом
+  return 'draft'
+}
+
+// Обновляем начальное состояние выбранных типов подачи
+const selectedServingTypes = ref(['packaged', 'draft', ])
+
 // Обновляем список отображаемых магазинов
 const displayedVenues = computed(() => {
   if (selectedVenues.value.length === 0) {
@@ -80,7 +98,7 @@ const displayedVenues = computed(() => {
   return selectedVenues.value
 })
 
-// Обновляем фильтрацию с учетом магазинов и пересечений
+// Обновляем фильтрацию с учетом магазинов, пересечений и типа подачи
 const filteredBeers = computed(() => {
   let filtered = uniqueBeers.value
 
@@ -100,27 +118,42 @@ const filteredBeers = computed(() => {
     )
   }
 
-  // Фильтрация по выбранным магазинам
-  if (selectedVenues.value.length > 0) {
+  // Фильтрация по выбранным магазинам и типу подачи
+  if (selectedVenues.value.length > 0 || selectedServingTypes.value.length < servingTypes.length) {
     filtered = filtered.filter(beer => {
       const [name, brewery] = beer.key.split('\n')
       
+      // Получаем все цены для данного пива
+      const beerPricesForVenues = beerPrices.value?.filter(price => 
+        price.name === name && 
+        price.brewery === brewery
+      )
+
+      // Проверяем наличие выбранных типов подачи
+      const hasSelectedServingType = beerPricesForVenues?.some(price => 
+        selectedServingTypes.value.includes(getServingType(price.volume))
+      )
+
+      if (!hasSelectedServingType) {
+        return false
+      }
+
+      if (selectedVenues.value.length === 0) {
+        return true
+      }
+
       if (showIntersectionsOnly.value) {
-        // Показывать только пиво, которое есть во всех выбранных магазинах
         return selectedVenues.value.every(venue => {
-          return beerPrices.value?.some(price => 
-            price.name === name && 
-            price.brewery === brewery && 
-            price.venue === venue
+          return beerPricesForVenues?.some(price => 
+            price.venue === venue &&
+            selectedServingTypes.value.includes(getServingType(price.volume))
           )
         })
       } else {
-        // Показывать пиво, которое есть хотя бы в одном из выбранных магазинов
         return selectedVenues.value.some(venue => {
-          return beerPrices.value?.some(price => 
-            price.name === name && 
-            price.brewery === brewery && 
-            price.venue === venue
+          return beerPricesForVenues?.some(price => 
+            price.venue === venue &&
+            selectedServingTypes.value.includes(getServingType(price.volume))
           )
         })
       }
@@ -129,6 +162,20 @@ const filteredBeers = computed(() => {
 
   return filtered
 })
+
+// Функция получения цен с учетом типа подачи
+const getPricesForBeerAndVenue = (beerKey: string, venue: string) => {
+  const [name, brewery] = beerKey.split('\n')
+  return beerPrices.value
+    ?.filter(beer => 
+      beer.name === name && 
+      beer.brewery === brewery && 
+      beer.venue === venue &&
+      selectedServingTypes.value.includes(getServingType(beer.volume))
+    )
+    .map(beer => `${beer.volume} - ${beer.price}₽`)
+    .join('<br>') || ''
+}
 </script>
 
 <template>
@@ -162,6 +209,15 @@ const filteredBeers = computed(() => {
           multiple
           variant="outlined"
           class="venue-select"
+        />
+        <v-select
+          v-model="selectedServingTypes"
+          :items="servingTypes"
+          chips
+          label="Тип подачи"
+          multiple
+          variant="outlined"
+          class="serving-select"
         />
         <v-checkbox
           v-model="showIntersectionsOnly"
@@ -231,11 +287,16 @@ const filteredBeers = computed(() => {
   gap: 1rem;
   align-items: center;
   margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
 .venue-select {
   max-width: 600px;
   flex: 1;
+}
+
+.serving-select {
+  max-width: 300px;
 }
 
 .prices-table {
