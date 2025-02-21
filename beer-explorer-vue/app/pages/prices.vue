@@ -164,20 +164,32 @@ const filteredBeers = computed(() => {
 
   return filtered
 })
+
+// Добавляем состояние для режима отображения
+const displayMode = ref<'table' | 'list'>('table')
 </script>
 
 <template>
   <div class="prices-container">
     <div class="search-container">
       <v-row>
-        <v-col cols="12">
+        <v-col cols="12" class="d-flex align-center">
           <v-text-field
             v-model="searchQuery"
             label="Поиск по названию или пивоварне"
             variant="outlined"
             clearable
             density="comfortable"
+            class="flex-grow-1"
           />
+          <v-btn-toggle
+            v-model="displayMode"
+            mandatory
+            class="ms-4"
+          >
+            <v-btn value="table" icon="mdi-table"></v-btn>
+            <v-btn value="list" icon="mdi-format-list-bulleted"></v-btn>
+          </v-btn-toggle>
         </v-col>
       </v-row>
       
@@ -230,12 +242,17 @@ const filteredBeers = computed(() => {
       </v-row>
     </div>
     
-    <BeerPricesTable
-      :beer-prices="beerPrices"
-      :filtered-beers="filteredBeers"
-      :displayed-venues="displayedVenues"
-      :selected-serving-types="selectedServingTypes"
-    />
+    <template v-if="displayMode === 'table'">
+      <BeerPricesTable
+        :beer-prices="beerPrices ?? []"
+        :filtered-beers="filteredBeers"
+        :displayed-venues="displayedVenues"
+        :selected-serving-types="selectedServingTypes"
+      />
+    </template>
+    <template v-else>
+      <div class="text-h5">Список</div>
+    </template>
   </div>
 </template>
 
