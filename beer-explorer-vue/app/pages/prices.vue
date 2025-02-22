@@ -63,11 +63,22 @@ const uniqueVenues = computed(() => {
   return Array.from(venues)
 })
 
-// Получаем уникальные пивоварни
+// Обновляем получение пивоварен с учетом выбранных магазинов
 const allBreweryItems = computed(() => {
   const breweriesSet = new Set<string>()
-  beerPrices.value?.forEach(beer => breweriesSet.add(beer.brewery))
-  const breweries = Array.from(breweriesSet);
+  
+  // Фильтруем пиво по выбранным магазинам
+  let filteredPrices = beerPrices.value || []
+  if (selectedVenues.value.length > 0) {
+    filteredPrices = filteredPrices.filter(beer => 
+      selectedVenues.value.includes(beer.venue)
+    )
+  }
+  
+  // Собираем только пивоварни из отфильтрованного списка
+  filteredPrices.forEach(beer => breweriesSet.add(beer.brewery))
+  
+  const breweries = Array.from(breweriesSet)
   breweries.sort()
   return breweries.map(brewery => ({
     title: brewery,
@@ -75,15 +86,25 @@ const allBreweryItems = computed(() => {
   }))
 })
 
-// Получаем уникальные стили
+// Обновляем получение стилей с учетом выбранных магазинов
 const allStyleItems = computed(() => {
   const allStylesSet = new Set<string>()
-  beerPrices.value?.forEach(beer => {
+  
+  // Фильтруем пиво по выбранным магазинам
+  let filteredPrices = beerPrices.value || []
+  if (selectedVenues.value.length > 0) {
+    filteredPrices = filteredPrices.filter(beer => 
+      selectedVenues.value.includes(beer.venue)
+    )
+  }
+  
+  // Собираем стили из отфильтрованного списка
+  filteredPrices.forEach(beer => {
     const style = simplifyStyles.value ? beer.style.split(' - ')[0]! : beer.style
     allStylesSet.add(style)
   })
 
-  const allStyles = Array.from(allStylesSet);
+  const allStyles = Array.from(allStylesSet)
   allStyles.sort()
   return allStyles.map(style => ({
     title: style,
@@ -341,7 +362,7 @@ const displayMode = ref<'table' | 'list'>('list')
         <v-col cols="12" sm="6">
           <v-list>
             <BeerListItem
-                v-for="beer in filteredBeers.slice(0, filteredBeers.length / 2)"
+                v-for="beer in filteredBeers.slice(0, Math.ceil(filteredBeers.length / 2))"
                 :key="beer.id"
                 :beer="beer"
             />
@@ -350,7 +371,7 @@ const displayMode = ref<'table' | 'list'>('list')
         <v-col cols="12" sm="6">
           <v-list>
             <BeerListItem
-                v-for="beer in filteredBeers.slice(filteredBeers.length / 2)"
+                v-for="beer in filteredBeers.slice(Math.ceil(filteredBeers.length / 2))"
                 :key="beer.id"
                 :beer="beer"
             />
