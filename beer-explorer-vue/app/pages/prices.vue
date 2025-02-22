@@ -184,7 +184,7 @@ const filteredBeers = computed(() => {
           ...beer, venuePrices: beer.venuePrices!
 
               // Фильтруем только выбранные магазины
-              .filter(venuePrices => selectedVenues.value.includes(venuePrices.venue))
+              .filter(venuePrices => selectedVenues.value.length === 0 || selectedVenues.value.includes(venuePrices.venue))
 
               // Фильтруем только выбранные типы подачи
               .map(venuePrices => ({
@@ -283,14 +283,28 @@ const displayMode = ref<'table' | 'list'>('list')
       />
     </template>
     <template v-else>
+      <v-row>
+        <v-col cols="12" sm="6">
+          <v-list>
+            <BeerListItem
+                v-for="beer in filteredBeers.slice(0, filteredBeers.length / 2)"
+                :key="beer.id"
+                :beer="beer"
+            />
+          </v-list>
+        </v-col>
+        <v-col cols="12" sm="6">
+          <v-list>
+            <BeerListItem
+                v-for="beer in filteredBeers.slice(filteredBeers.length / 2)"
+                :key="beer.id"
+                :beer="beer"
+            />
+          </v-list>
 
-      <v-list>
-        <BeerListItem
-            v-for="beer in filteredBeers"
-            :key="beer.id"
-            :beer="beer"
-        />
-      </v-list>
+        </v-col>
+      </v-row>
+
 
     </template>
   </div>
