@@ -1,76 +1,38 @@
 <script setup lang="ts">
-interface BeerPrice {
-  name: string
-  brewery: string
-  venue: string
-  volume: string
-  price: number
-  url: string
-}
+import type {Beer} from "~/logic/beer";
 
-interface Beer {
-  key: string
-  name: string
-  brewery: string
-  url: string
-  displayName: string
-}
-
-const props = defineProps<{
-  beerPrices: BeerPrice[] | null
+defineProps<{
   filteredBeers: Beer[]
   displayedVenues: string[]
-  selectedServingTypes: string[]
 }>()
 
-// Функция получения цен с учетом типа подачи
-const getPricesForBeerAndVenue = (beerKey: string, venue: string) => {
-  const [name, brewery] = beerKey.split('\n')
-  return props.beerPrices
-    ?.filter(beer => 
-      beer.name === name && 
-      beer.brewery === brewery && 
-      beer.venue === venue &&
-      props.selectedServingTypes.includes(getServingType(beer.volume))
-    )
-    .map(beer => `${beer.volume} - ${beer.price}₽`)
-    .join('<br>') || ''
+
+function getPricesForBeerAndVenue(beer: Beer, venue: string): string {
+  return (beer.venuePrices?.find(venuePrices => venuePrices.venue === venue)?.prices || [])
+      .map(price => `${price.volume} - ${price.price} ₽`).join('<br>')
 }
 
-// Функция определения типа подачи
-const getServingType = (volume: string): string => {
-  const volumeLower = volume.toLowerCase()
-  
-  if (volumeLower.includes('sample') || volumeLower.includes('cl')) {
-    return 'sample'
-  }
-  
-  if (volumeLower.includes('bottle') || 
-      volumeLower.includes('can') || 
-      volumeLower.includes('btl')) {
-    return 'packaged'
-  }
-  
-  return 'draft'
-}
+
 </script>
 
 <template>
   <table class="prices-table">
     <thead>
-      <tr>
-        <th>Пиво</th>
-        <th v-for="venue in displayedVenues" :key="venue">{{ venue }}</th>
-      </tr>
+    <tr>
+      <th>Пиво</th>
+      <th v-for="venue in displayedVenues" :key="venue">{{ venue }}</th>
+    </tr>
     </thead>
     <tbody>
-      <tr v-for="beer in filteredBeers" :key="beer.key">
-        <td class="beer-name">
-          <a :href="beer.url" target="_blank" v-html="beer.displayName"></a>
-        </td>
-        <td v-for="venue in displayedVenues" :key="venue" v-html="getPricesForBeerAndVenue(beer.key, venue)">
-        </td>
-      </tr>
+    <tr v-for="beer in filteredBeers" :key="beer.id">
+      <td class="beer-name">
+        <a :href="beer.url" target="_blank">
+          <strong>{{ beer.name }}</strong><br>
+          {{ beer.brewery }}
+        </a>
+      </td>
+      <td v-for="venue in displayedVenues" :key="venue" v-html="getPricesForBeerAndVenue(beer, venue)"></td>
+    </tr>
     </tbody>
   </table>
 </template>

@@ -1,36 +1,60 @@
 <script setup lang="ts">
 import BeerPricesTable from '~/components/BeerPricesTable.vue'
+import type {Beer} from "~/logic/beer";
 
-interface BeerPrice {
-  name: string
-  brewery: string
-  venue: string
-  volume: string
-  price: number
-  url: string
+interface RawBeerPrice {
+  name: string;
+  brewery: string;
+  venue: string;
+  volume: string;
+  price: number;
+  url: string;
+  rate: number;
+  style: string;
 }
 
-const { data: beerPrices } = await useFetch<BeerPrice[]>('/api/beer-prices')
+const {data: beerPrices} = await useFetch<RawBeerPrice[]>('/api/beer-prices')
 
 // Подготовка данных для таблицы
-const uniqueBeers = computed(() => {
-  const beers = new Map<string, { name: string, brewery: string, url: string, displayName: string }>()
-  
-  beerPrices.value?.forEach(beer => {
-    const key = `${beer.name}\n${beer.brewery}`
-    if (!beers.has(key)) {
-      beers.set(key, { 
-        name: beer.name, 
-        brewery: beer.brewery, 
-        url: beer.url,
-        displayName: `<strong>${beer.name}</strong>\n${beer.brewery}`
-      })
+const uniqueBeers = computed<Beer[]>(() => {
+  const beers = new Map<string, Beer>()
+
+  beerPrices.value?.forEach(raw => {
+    const id = `${raw.name}\n${raw.brewery}`
+
+    let beer: Beer;
+    if (!beers.has(id)) {
+      beer = {
+        name: raw.name,
+        brewery: raw.brewery,
+        url: raw.url,
+        rating: raw.rate,
+        style: raw.style,
+        venuePrices: [],
+      };
+      beers.set(id, beer)
+    } else {
+      beer = beers.get(id)!;
     }
+
+    let venuePrices = beer.venuePrices!.find(venue => venue.venue === raw.venue);
+    if (!venuePrices) {
+      venuePrices = {
+        venue: raw.venue,
+        prices: [],
+      }
+      beer.venuePrices!.push(venuePrices)
+    }
+
+    venuePrices.prices.push({
+      volume: raw.volume,
+      price: raw.price,
+    })
   })
-  
-  return Array.from(beers.entries()).map(([key, value]) => ({
-    key,
-    ...value
+
+  return Array.from(beers.entries()).map(([id, value]) => ({
+    id,
+    ...value,
   }))
 })
 
@@ -64,33 +88,33 @@ const showIntersectionsOnly = ref(false)
 
 // Обновляем типы подачи
 const servingTypes = [
-  { title: 'Банки/Бутылки', value: 'packaged' },
-  { title: 'Розлив', value: 'draft' },
-  { title: 'Сэмплы', value: 'sample' },
+  {title: 'Банки/Бутылки', value: 'packaged'},
+  {title: 'Розлив', value: 'draft'},
+  {title: 'Сэмплы', value: 'sample'},
 ]
 
 // Обновляем функцию определения типа подачи
 const getServingType = (volume: string): string => {
   const volumeLower = volume.toLowerCase()
-  
+
   // Проверяем сэмплы
   if (volumeLower.includes('sample') || volumeLower.includes('cl')) {
     return 'sample'
   }
-  
+
   // Проверяем бутылки/банки
-  if (volumeLower.includes('bottle') || 
-      volumeLower.includes('can') || 
+  if (volumeLower.includes('bottle') ||
+      volumeLower.includes('can') ||
       volumeLower.includes('btl')) {
     return 'packaged'
   }
-  
+
   // Все остальное считаем розливом
   return 'draft'
 }
 
 // Обновляем начальное состояние выбранных типов подачи
-const selectedServingTypes = ref(['packaged', 'draft', ])
+const selectedServingTypes = ref(['packaged', 'draft',])
 
 // Обновляем список отображаемых магазинов
 const displayedVenues = computed(() => {
@@ -106,8 +130,8 @@ const filteredBeers = computed(() => {
 
   // Фильтрация по выбранным пивоварням
   if (selectedBreweries.value.length) {
-    filtered = filtered.filter(beer => 
-      selectedBreweries.value.includes(beer.brewery)
+    filtered = filtered.filter(beer =>
+        selectedBreweries.value.includes(beer.brewery)
     )
   }
 
@@ -115,25 +139,22 @@ const filteredBeers = computed(() => {
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
     filtered = filtered.filter(beer =>
-      beer.name.toLowerCase().includes(query) ||
-      beer.brewery.toLowerCase().includes(query)
+        beer.name.toLowerCase().includes(query) ||
+        beer.brewery.toLowerCase().includes(query)
     )
   }
 
   // Фильтрация по выбранным магазинам и типу подачи
   if (selectedVenues.value.length > 0 || selectedServingTypes.value.length < servingTypes.length) {
     filtered = filtered.filter(beer => {
-      const [name, brewery] = beer.key.split('\n')
-      
       // Получаем все цены для данного пива
-      const beerPricesForVenues = beerPrices.value?.filter(price => 
-        price.name === name && 
-        price.brewery === brewery
-      )
-
+      const beerPricesForVenues = beer.venuePrices!.flatMap(venuePrices => venuePrices.prices.map(price => ({
+        ...price,
+        venue: venuePrices.venue
+      })));
       // Проверяем наличие выбранных типов подачи
-      const hasSelectedServingType = beerPricesForVenues?.some(price => 
-        selectedServingTypes.value.includes(getServingType(price.volume))
+      const hasSelectedServingType = beerPricesForVenues?.some(price =>
+          selectedServingTypes.value.includes(getServingType(price.volume))
       )
 
       if (!hasSelectedServingType) {
@@ -146,20 +167,28 @@ const filteredBeers = computed(() => {
 
       if (showIntersectionsOnly.value) {
         return selectedVenues.value.every(venue => {
-          return beerPricesForVenues?.some(price => 
-            price.venue === venue &&
-            selectedServingTypes.value.includes(getServingType(price.volume))
+          return beerPricesForVenues?.some(price =>
+              price.venue === venue &&
+              selectedServingTypes.value.includes(getServingType(price.volume))
           )
         })
       } else {
         return selectedVenues.value.some(venue => {
-          return beerPricesForVenues?.some(price => 
-            price.venue === venue &&
-            selectedServingTypes.value.includes(getServingType(price.volume))
+          return beerPricesForVenues?.some(price =>
+              price.venue === venue &&
+              selectedServingTypes.value.includes(getServingType(price.volume))
           )
         })
       }
     })
+        // Фильтруем только выбранные типы подачи
+        .map(beer => ({
+          ...beer, venuePrices: beer.venuePrices!.map(venuePrices => ({
+                ...venuePrices,
+                prices: venuePrices.prices.filter(price => selectedServingTypes.value.includes(getServingType(price.volume))),
+              })
+          )
+        }))
   }
 
   return filtered
@@ -175,79 +204,77 @@ const displayMode = ref<'table' | 'list'>('table')
       <v-row>
         <v-col cols="12" class="d-flex align-center">
           <v-text-field
-            v-model="searchQuery"
-            label="Поиск по названию или пивоварне"
-            variant="outlined"
-            clearable
-            density="comfortable"
-            class="flex-grow-1"
+              v-model="searchQuery"
+              label="Поиск по названию или пивоварне"
+              variant="outlined"
+              clearable
+              density="comfortable"
+              class="flex-grow-1"
           />
           <v-btn-toggle
-            v-model="displayMode"
-            mandatory
-            class="ms-4"
+              v-model="displayMode"
+              mandatory
+              class="ms-4"
           >
             <v-btn value="table" icon="mdi-table"></v-btn>
             <v-btn value="list" icon="mdi-format-list-bulleted"></v-btn>
           </v-btn-toggle>
         </v-col>
       </v-row>
-      
+
       <v-row>
         <v-col cols="4">
           <div>
             <v-autocomplete
-              v-model="selectedVenues"
-              :items="uniqueVenues"
-              chips
-              label="Выберите магазины"
-              multiple
-              variant="outlined"
-              hide-details
-              clearable
+                v-model="selectedVenues"
+                :items="uniqueVenues"
+                chips
+                label="Выберите магазины"
+                multiple
+                variant="outlined"
+                hide-details
+                clearable
             />
             <v-checkbox
-              v-if="selectedVenues.length > 1"
-              v-model="showIntersectionsOnly"
-              label="Только пересечения"
-              :disabled="selectedVenues.length <= 1"
-              density="comfortable"
-              class="mt-2"
+                v-if="selectedVenues.length > 1"
+                v-model="showIntersectionsOnly"
+                label="Только пересечения"
+                :disabled="selectedVenues.length <= 1"
+                density="comfortable"
+                class="mt-2"
             />
           </div>
         </v-col>
 
         <v-col cols="4">
           <v-autocomplete
-            v-model="selectedBreweries"
-            :items="uniqueBreweries"
-            chips
-            label="Выберите пивоварни"
-            multiple
-            variant="outlined"
-            clearable
+              v-model="selectedBreweries"
+              :items="uniqueBreweries"
+              chips
+              label="Выберите пивоварни"
+              multiple
+              variant="outlined"
+              clearable
           />
         </v-col>
-        
+
         <v-col cols="4">
           <v-select
-            v-model="selectedServingTypes"
-            :items="servingTypes"
-            chips
-            label="Тип подачи"
-            multiple
-            variant="outlined"
+              v-model="selectedServingTypes"
+              :items="servingTypes"
+              chips
+              label="Тип подачи"
+              multiple
+              variant="outlined"
           />
         </v-col>
       </v-row>
     </div>
-    
+
     <template v-if="displayMode === 'table'">
       <BeerPricesTable
-        :beer-prices="beerPrices ?? []"
-        :filtered-beers="filteredBeers"
-        :displayed-venues="displayedVenues"
-        :selected-serving-types="selectedServingTypes"
+          :filtered-beers="filteredBeers"
+          :displayed-venues="displayedVenues"
       />
     </template>
     <template v-else>

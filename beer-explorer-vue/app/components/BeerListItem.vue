@@ -1,11 +1,6 @@
 <script lang="ts" setup>
-interface Beer {
-  brewery: string
-  name: string
-  rating: number
-  url: string
-  style: string
-}
+
+import type {Beer} from "~/logic/beer";
 
 interface Props {
   beer: Beer;
