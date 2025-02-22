@@ -64,12 +64,30 @@ const uniqueVenues = computed(() => {
 })
 
 // Получаем уникальные пивоварни
-const uniqueBreweries = computed(() => {
-  const breweries = new Set<string>()
-  beerPrices.value?.forEach(beer => breweries.add(beer.brewery))
-  return Array.from(breweries).map(brewery => ({
+const allBreweryItems = computed(() => {
+  const breweriesSet = new Set<string>()
+  beerPrices.value?.forEach(beer => breweriesSet.add(beer.brewery))
+  const breweries = Array.from(breweriesSet);
+  breweries.sort()
+  return breweries.map(brewery => ({
     title: brewery,
     value: brewery,
+  }))
+})
+
+// Получаем уникальные стили
+const allStyleItems = computed(() => {
+  const allStylesSet = new Set<string>()
+  beerPrices.value?.forEach(beer => {
+    const style = simplifyStyles.value ? beer.style.split(' - ')[0]! : beer.style
+    allStylesSet.add(style)
+  })
+
+  const allStyles = Array.from(allStylesSet);
+  allStyles.sort()
+  return allStyles.map(style => ({
+    title: style,
+    value: style,
   }))
 })
 
@@ -123,9 +141,18 @@ const displayedVenues = computed(() => {
   return selectedVenues.value
 })
 
-// Обновляем фильтрацию с учетом магазинов, пересечений и типа подачи
+// Добавляем состояние для выбранных стилей
+const selectedStyles = ref<string[]>([])
+
+// Добавляем состояние для упрощения стилей
+const simplifyStyles = ref(true)
+
+// Обновляем фильтрацию с учетом стилей
 const filteredBeers = computed(() => {
-  let filtered = uniqueBeers.value
+  let filtered = uniqueBeers.value.map(beer => ({
+    ...beer,
+    style: simplifyStyles.value ? beer.style.split(' - ')[0]! : beer.style
+  }))
 
   // Фильтрация по выбранным пивоварням
   if (selectedBreweries.value.length) {
@@ -195,6 +222,13 @@ const filteredBeers = computed(() => {
         }))
   }
 
+  // Фильтрация по выбранным стилям
+  if (selectedStyles.value.length) {
+    filtered = filtered.filter(beer =>
+        selectedStyles.value.includes(beer.style)
+    )
+  }
+
   return filtered
 })
 
@@ -221,8 +255,8 @@ const displayMode = ref<'table' | 'list'>('list')
               mandatory
               class="ms-4"
           >
-            <v-btn value="table" icon="mdi-table"></v-btn>
-            <v-btn value="list" icon="mdi-format-list-bulleted"></v-btn>
+            <v-btn value="table" icon="mdi-table"/>
+            <v-btn value="list" icon="mdi-format-list-bulleted"/>
           </v-btn-toggle>
         </v-col>
       </v-row>
@@ -254,12 +288,32 @@ const displayMode = ref<'table' | 'list'>('list')
         <v-col cols="4">
           <v-autocomplete
               v-model="selectedBreweries"
-              :items="uniqueBreweries"
+              :items="allBreweryItems"
               chips
               label="Выберите пивоварни"
               multiple
               variant="outlined"
               clearable
+          />
+        </v-col>
+
+        <v-col cols="4">
+          <v-autocomplete
+              v-model="selectedStyles"
+              :items="allStyleItems"
+              chips
+              label="Выберите стили"
+              multiple
+              variant="outlined"
+              clearable
+              hide-details
+          />
+          <v-checkbox
+              v-model="simplifyStyles"
+              label='Упрощенные стили ("Barleywine - American" → "Barleywine")'
+              density="comfortable"
+              class="mt-2"
+              hide-details
           />
         </v-col>
 
