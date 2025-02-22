@@ -1,14 +1,6 @@
 <script lang="ts" setup>
 import BeerListItem from '~/components/BeerListItem.vue'
-
-
-interface Beer {
-  brewery: string
-  name: string
-  rating: number
-  url: string
-  style: string
-}
+import type {Beer} from "~/logic/beer";
 
 const {data: beers} = await useFetch<Beer[]>('/api/beers')
 
@@ -48,7 +40,7 @@ const sortBeers = (beers: Beer[]): Beer[] => {
 
   return [...beers].sort((a, b) => {
     if (sortType === 'rating') {
-      return b.rating - a.rating
+      return b.rate - a.rate
     } else {
       return a.name.localeCompare(b.name)
     }
@@ -106,12 +98,12 @@ const sortGroups = (groups: GroupedBeers): GroupedBeers => {
 const simplifyStyles = ref(true)
 
 // Создаем вычисляемое свойство для обработанного списка пива
-const processedBeers = computed(() => {
+const processedBeers = computed<Beer[]>(() => {
   if (!beers.value) return []
 
   return beers.value.map(beer => ({
     ...beer,
-    style: simplifyStyles.value ? beer.style.split(' - ')[0] : beer.style
+    style: simplifyStyles.value ? beer.style.split(' - ')[0]! : beer.style
   }))
 })
 

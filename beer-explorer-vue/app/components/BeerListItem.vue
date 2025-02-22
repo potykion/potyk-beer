@@ -7,6 +7,11 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+
+// array of stars
+const stars = computed(() => Array.from({length: Math.round(props.beer.rate)}, (_, __) => "⭐").join(""))
+
+
 </script>
 
 <template>
@@ -22,7 +27,19 @@ const props = defineProps<Props>()
     </template>
 
     <template v-slot:subtitle>
-      {{ props.beer.brewery }} • {{ beer.rating }} ⭐
+      {{ beer.abv }}% ABV • {{ beer.ibu }} IBU • {{ props.beer.brewery }} • {{ stars }} ({{ beer.rate }})
     </template>
+
+    <template v-for="venue in props.beer.venuePrices" :key="venue.venue">
+      <template v-if="venue.prices.length > 0">
+        <div class="text-body-2">
+          <div class="font-weight-bold">{{ venue.venue }}</div>
+          <div v-for="price in venue.prices" :key="price.volume">
+            {{ price.volume }} - {{ price.price }} ₽
+          </div>
+        </div>
+      </template>
+    </template>
+
   </v-list-item>
 </template>

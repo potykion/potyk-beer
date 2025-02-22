@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import BeerPricesTable from '~/components/BeerPricesTable.vue'
 import type {Beer} from "~/logic/beer";
+import BeerListItem from "~/components/BeerListItem.vue";
 
 interface RawBeerPrice {
   name: string;
@@ -10,6 +11,8 @@ interface RawBeerPrice {
   price: number;
   url: string;
   rate: number;
+  abv: number;
+  ibu: number;
   style: string;
 }
 
@@ -25,11 +28,7 @@ const uniqueBeers = computed<Beer[]>(() => {
     let beer: Beer;
     if (!beers.has(id)) {
       beer = {
-        name: raw.name,
-        brewery: raw.brewery,
-        url: raw.url,
-        rating: raw.rate,
-        style: raw.style,
+        ...raw,
         venuePrices: [],
       };
       beers.set(id, beer)
@@ -181,13 +180,18 @@ const filteredBeers = computed(() => {
         })
       }
     })
-        // Фильтруем только выбранные типы подачи
         .map(beer => ({
-          ...beer, venuePrices: beer.venuePrices!.map(venuePrices => ({
-                ...venuePrices,
-                prices: venuePrices.prices.filter(price => selectedServingTypes.value.includes(getServingType(price.volume))),
-              })
-          )
+          ...beer, venuePrices: beer.venuePrices!
+
+              // Фильтруем только выбранные магазины
+              .filter(venuePrices => selectedVenues.value.includes(venuePrices.venue))
+
+              // Фильтруем только выбранные типы подачи
+              .map(venuePrices => ({
+                    ...venuePrices,
+                    prices: venuePrices.prices.filter(price => selectedServingTypes.value.includes(getServingType(price.volume))),
+                  })
+              )
         }))
   }
 
@@ -195,7 +199,7 @@ const filteredBeers = computed(() => {
 })
 
 // Добавляем состояние для режима отображения
-const displayMode = ref<'table' | 'list'>('table')
+const displayMode = ref<'table' | 'list'>('list')
 </script>
 
 <template>
@@ -210,6 +214,7 @@ const displayMode = ref<'table' | 'list'>('table')
               clearable
               density="comfortable"
               class="flex-grow-1"
+              hide-details
           />
           <v-btn-toggle
               v-model="displayMode"
@@ -278,7 +283,15 @@ const displayMode = ref<'table' | 'list'>('table')
       />
     </template>
     <template v-else>
-      <div class="text-h5">Список</div>
+
+      <v-list>
+        <BeerListItem
+            v-for="beer in filteredBeers"
+            :key="beer.id"
+            :beer="beer"
+        />
+      </v-list>
+
     </template>
   </div>
 </template>

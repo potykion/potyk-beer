@@ -14,9 +14,12 @@ export interface Beer {
 
     brewery: string;
     name: string;
-    rating: number;
+    rate: number;
     url: string;
     style: string;
+
+    abv: number;
+    ibu: number;
 
     venuePrices?: VenuePrices[];
 }
