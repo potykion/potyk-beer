@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import type {Beer} from "~/logic/beer";
+import {type Beer, compPricePerL, parseVolumeToL} from "~/logic/beer";
 
 interface Props {
   beer: Beer;
@@ -19,6 +19,17 @@ const stars = computed(() => Array.from({length: Math.round(props.beer.rate)}, (
       :href="beer.url"
       target="_blank"
   >
+    <template v-slot:prepend>
+      <v-img
+          v-if="beer.img"
+          :src="beer.img"
+          :lazy-src="beer.img"
+          width="50"
+          height="50"
+          class="mr-4"
+      />
+    </template>
+
     <template v-slot:title>
       <div>
         <span class="font-weight-bold text-body-1">{{ beer.name }}</span>&nbsp;
@@ -35,7 +46,7 @@ const stars = computed(() => Array.from({length: Math.round(props.beer.rate)}, (
         <div class="text-body-2">
           <div class="font-weight-bold">{{ venue.venue }}</div>
           <div v-for="price in venue.prices" :key="price.volume">
-            {{ price.volume }} - {{ price.price }} ₽
+            {{ price.volume }} - {{ price.price }} ₽ <small class="text-grey-darken-1">({{ compPricePerL(price.price,price.volume) }} ₽ / л)</small>
           </div>
         </div>
       </template>

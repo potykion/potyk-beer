@@ -8,7 +8,7 @@ export default defineEventHandler(() => {
     SELECT 
       *
     FROM untappd_beer_prices
-    where price > 0
+    where price > 0 and date_parsed = '2025-02-22'
     ORDER BY price
     
   `).all()

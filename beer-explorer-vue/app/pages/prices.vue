@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BeerPricesTable from '~/components/BeerPricesTable.vue'
-import type {Beer} from "~/logic/beer";
+import {type Beer, compPricePerL} from "~/logic/beer";
 import BeerListItem from "~/components/BeerListItem.vue";
 
 interface RawBeerPrice {
@@ -18,8 +18,10 @@ interface RawBeerPrice {
 
 const {data: beerPrices} = await useFetch<RawBeerPrice[]>('/api/beer-prices')
 
-// Подготовка данных для таблицы
-const uniqueBeers = computed<Beer[]>(() => {
+/**
+ * Все пивасы с ценами по точкам и объемам
+ */
+const uniqueBeers = computed<(Beer)[]>(() => {
   const beers = new Map<string, Beer>()
 
   beerPrices.value?.forEach(raw => {
@@ -66,18 +68,18 @@ const uniqueVenues = computed(() => {
 // Обновляем получение пивоварен с учетом выбранных магазинов
 const allBreweryItems = computed(() => {
   const breweriesSet = new Set<string>()
-  
+
   // Фильтруем пиво по выбранным магазинам
   let filteredPrices = beerPrices.value || []
   if (selectedVenues.value.length > 0) {
-    filteredPrices = filteredPrices.filter(beer => 
-      selectedVenues.value.includes(beer.venue)
+    filteredPrices = filteredPrices.filter(beer =>
+        selectedVenues.value.includes(beer.venue)
     )
   }
-  
+
   // Собираем только пивоварни из отфильтрованного списка
   filteredPrices.forEach(beer => breweriesSet.add(beer.brewery))
-  
+
   const breweries = Array.from(breweriesSet)
   breweries.sort()
   return breweries.map(brewery => ({
@@ -89,15 +91,15 @@ const allBreweryItems = computed(() => {
 // Обновляем получение стилей с учетом выбранных магазинов
 const allStyleItems = computed(() => {
   const allStylesSet = new Set<string>()
-  
+
   // Фильтруем пиво по выбранным магазинам
   let filteredPrices = beerPrices.value || []
   if (selectedVenues.value.length > 0) {
-    filteredPrices = filteredPrices.filter(beer => 
-      selectedVenues.value.includes(beer.venue)
+    filteredPrices = filteredPrices.filter(beer =>
+        selectedVenues.value.includes(beer.venue)
     )
   }
-  
+
   // Собираем стили из отфильтрованного списка
   filteredPrices.forEach(beer => {
     const style = simplifyStyles.value ? beer.style.split(' - ')[0]! : beer.style
@@ -119,7 +121,7 @@ const selectedBreweries = ref<string[]>([])
 const searchQuery = ref('')
 
 // Состояние выбранных магазинов
-const selectedVenues = ref<string[]>([])
+const selectedVenues = ref<string[]>(uniqueVenues.value.slice(0, 1))
 
 // Состояние чекбокса пересечений
 const showIntersectionsOnly = ref(false)
@@ -154,6 +156,15 @@ const getServingType = (volume: string): string => {
 // Обновляем начальное состояние выбранных типов подачи
 const selectedServingTypes = ref(['packaged', 'draft',])
 
+const sortByOptions = [
+  {title: 'По алкоголю', value: 'abv'},
+  {title: 'По цене', value: 'price'},
+  {title: 'По цене за литр', value: 'pricePerL'},
+  {title: 'По названию', value: 'name'},
+]
+
+const sortBy = ref<'abv' | 'price' | 'pricePerL' | 'name' | null>('pricePerL')
+
 // Обновляем список отображаемых магазинов
 const displayedVenues = computed(() => {
   if (selectedVenues.value.length === 0) {
@@ -174,6 +185,8 @@ const filteredBeers = computed(() => {
     ...beer,
     style: simplifyStyles.value ? beer.style.split(' - ')[0]! : beer.style
   }))
+
+
 
   // Фильтрация по выбранным пивоварням
   if (selectedBreweries.value.length) {
@@ -250,6 +263,29 @@ const filteredBeers = computed(() => {
     )
   }
 
+   if (sortBy.value) {
+    if (sortBy.value === "abv") {
+      filtered.sort((a, b) => a.abv - b.abv)
+    } else if (sortBy.value === "name") {
+      filtered.sort((a, b) => a.name.localeCompare(b.name))
+    } else if (sortBy.value === "price") {
+      filtered.sort((a, b) => {
+        const aMinPrice = Math.min(...a.venuePrices!.flatMap(vp => vp.prices).flatMap(p => p.price))
+        const bMinPrice = Math.min(...b.venuePrices!.flatMap(vp => vp.prices).flatMap(p => p.price))
+
+        return aMinPrice - bMinPrice;
+      })
+    } else if (sortBy.value === "pricePerL") {
+      filtered.sort((a, b) => {
+
+        const aMinPricePerL = Math.min(...a.venuePrices!.flatMap(vp => vp.prices).flatMap(p => compPricePerL(p.price, p.volume)))
+        const bMinPricePerL = Math.min(...b.venuePrices!.flatMap(vp => vp.prices).flatMap(p => compPricePerL(p.price, p.volume)))
+
+        return aMinPricePerL - bMinPricePerL;
+      })
+    }
+  }
+
   return filtered
 })
 
@@ -258,7 +294,7 @@ const displayMode = ref<'table' | 'list'>('list')
 </script>
 
 <template>
-  <div class="prices-container">
+  <v-container fluid>
     <div class="search-container">
       <v-row>
         <v-col cols="12" class="d-flex align-center">
@@ -348,6 +384,15 @@ const displayMode = ref<'table' | 'list'>('list')
               variant="outlined"
           />
         </v-col>
+
+        <v-col cols="4">
+          <v-select
+              v-model="sortBy"
+              :items="sortByOptions"
+              label="Сортировка"
+              variant="outlined"
+          />
+        </v-col>
       </v-row>
     </div>
 
@@ -382,16 +427,19 @@ const displayMode = ref<'table' | 'list'>('list')
 
 
     </template>
-  </div>
+  </v-container>
 </template>
 
 <style scoped>
+/*
 .prices-container {
   padding: 1rem;
   overflow-x: auto;
   position: relative;
   max-height: calc(100vh - 2rem);
 }
+
+ */
 
 .search-container {
   margin-bottom: 1rem;
