@@ -186,6 +186,10 @@ const filteredBeers = computed(() => {
     style: simplifyStyles.value ? beer.style.split(' - ')[0]! : beer.style
   }))
 
+  if (hideTried.value) {
+    filtered = filtered.filter(f => !f.tried)
+  }
+
 
 
   // Фильтрация по выбранным пивоварням
@@ -291,6 +295,8 @@ const filteredBeers = computed(() => {
 
 // Добавляем состояние для режима отображения
 const displayMode = ref<'table' | 'list'>('list')
+
+const hideTried = ref(true);
 </script>
 
 <template>
@@ -391,6 +397,13 @@ const displayMode = ref<'table' | 'list'>('list')
               :items="sortByOptions"
               label="Сортировка"
               variant="outlined"
+          />
+        </v-col>
+
+        <v-col cols="4">
+          <v-checkbox
+              v-model="hideTried"
+              label='Скрыть попробованные'
           />
         </v-col>
       </v-row>

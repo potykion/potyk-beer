@@ -23,6 +23,8 @@ export interface Beer {
 
     venuePrices?: VenuePrices[];
     img?: string;
+
+    tried?: boolean;
 }
 
 

@@ -6,10 +6,12 @@ export default defineEventHandler(() => {
   
   const prices = db.prepare(`
     SELECT 
-      *
-    FROM untappd_beer_prices
+      *, (select 1 from beer_my_untappd_beers bmub where bmub.url = ubp.url) as tried
+    FROM untappd_beer_prices ubp
     where price > 0 and date_parsed = '2025-02-22'
     ORDER BY price
+
+    
     
   `).all()
   
