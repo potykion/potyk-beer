@@ -268,14 +268,14 @@ const filteredBeers = computed(() => {
   }
 
 
-  const minAbv = Math.min(abvRange.value[0], abvRange.value[1])
-  const maxAbv = Math.max(abvRange.value[0], abvRange.value[1])
+  const minAbv = Math.min(abvRange.value[0] ?? 0, abvRange.value[1] ?? 20)
+  const maxAbv = Math.max(abvRange.value[0] ?? 0, abvRange.value[1] ?? 20)
   filtered = filtered.filter(beer => {
     return beer.abv >= minAbv && (maxAbv == 20 ? true : beer.abv <= maxAbv)
   })
 
-  const minRate = Math.min(rateRange.value[0], rateRange.value[1])
-  const maxRate = Math.max(rateRange.value[0], rateRange.value[1])
+  const minRate = Math.min(rateRange.value[0] ?? 0, rateRange.value[1] ?? 5)
+  const maxRate = Math.max(rateRange.value[0] ?? 0, rateRange.value[1] ?? 5)
   filtered = filtered.filter(beer => {
     return beer.rate >= minRate && beer.rate <= maxRate
   })
