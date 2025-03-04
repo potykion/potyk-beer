@@ -267,7 +267,22 @@ const filteredBeers = computed(() => {
     )
   }
 
-   if (sortBy.value) {
+
+  const minAbv = Math.min(abvRange.value[0], abvRange.value[1])
+  const maxAbv = Math.max(abvRange.value[0], abvRange.value[1])
+  filtered = filtered.filter(beer => {
+    return beer.abv >= minAbv && (maxAbv == 20 ? true : beer.abv <= maxAbv)
+  })
+
+  const minRate = Math.min(rateRange.value[0], rateRange.value[1])
+  const maxRate = Math.max(rateRange.value[0], rateRange.value[1])
+  filtered = filtered.filter(beer => {
+    return beer.rate >= minRate && beer.rate <= maxRate
+  })
+
+
+  // Сортировка
+  if (sortBy.value) {
     if (sortBy.value === "abv") {
       filtered.sort((a, b) => a.abv - b.abv)
     } else if (sortBy.value === "name") {
@@ -297,10 +312,16 @@ const filteredBeers = computed(() => {
 const displayMode = ref<'table' | 'list'>('list')
 
 const hideTried = ref(true);
+
+const abvRange = ref([1, 20]);
+
+const rateRange = ref([3.5, 5]);
+
+
 </script>
 
 <template>
-  <v-container fluid>
+  <v-container>
     <div class="search-container">
       <v-row>
         <v-col cols="12" class="d-flex align-center">
@@ -406,8 +427,32 @@ const hideTried = ref(true);
               label='Скрыть попробованные'
           />
         </v-col>
+
+
+        <v-col cols="4">
+          <v-range-slider
+              label="Алкоголь"
+              v-model="abvRange"
+              min="0"
+              max="20"
+              :step="0.1"
+              thumb-label="always"
+          ></v-range-slider>
+        </v-col>
+
+        <v-col cols="4">
+          <v-range-slider
+              label="Рейтинг"
+              v-model="rateRange"
+              min="0"
+              max="5"
+              :step="0.1"
+              thumb-label="always"
+          ></v-range-slider>
+        </v-col>
       </v-row>
     </div>
+
 
     <template v-if="displayMode === 'table'">
       <BeerPricesTable
@@ -416,30 +461,18 @@ const hideTried = ref(true);
       />
     </template>
     <template v-else>
-      <v-row>
-        <v-col cols="12" sm="6">
-          <v-list>
-            <BeerListItem
-                v-for="beer in filteredBeers.slice(0, Math.ceil(filteredBeers.length / 2))"
-                :key="beer.id"
-                :beer="beer"
-            />
-          </v-list>
-        </v-col>
-        <v-col cols="12" sm="6">
-          <v-list>
-            <BeerListItem
-                v-for="beer in filteredBeers.slice(Math.ceil(filteredBeers.length / 2))"
-                :key="beer.id"
-                :beer="beer"
-            />
-          </v-list>
 
-        </v-col>
-      </v-row>
-
+      <v-list ref="price-list">
+        <v-virtual-scroll :items="filteredBeers" height="500">
+          <template v-slot:default="{ item }">
+            <BeerListItem  :beer="item"/>
+          </template>
+        </v-virtual-scroll>
+      </v-list>
 
     </template>
+
+
   </v-container>
 </template>
 
