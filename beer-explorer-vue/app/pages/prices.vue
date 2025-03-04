@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BeerPricesTable from '~/components/BeerPricesTable.vue'
-import {type Beer, compPricePerL} from "~/logic/beer";
+import { type Beer, compPricePerL } from "~/logic/beer";
 import BeerListItem from "~/components/BeerListItem.vue";
 
 interface RawBeerPrice {
@@ -16,7 +16,7 @@ interface RawBeerPrice {
   style: string;
 }
 
-const {data: beerPrices} = await useFetch<RawBeerPrice[]>('/api/beer-prices')
+const { data: beerPrices } = await useFetch<RawBeerPrice[]>('/api/beer-prices')
 
 /**
  * Все пивасы с ценами по точкам и объемам
@@ -73,7 +73,7 @@ const allBreweryItems = computed(() => {
   let filteredPrices = beerPrices.value || []
   if (selectedVenues.value.length > 0) {
     filteredPrices = filteredPrices.filter(beer =>
-        selectedVenues.value.includes(beer.venue)
+      selectedVenues.value.includes(beer.venue)
     )
   }
 
@@ -96,7 +96,7 @@ const allStyleItems = computed(() => {
   let filteredPrices = beerPrices.value || []
   if (selectedVenues.value.length > 0) {
     filteredPrices = filteredPrices.filter(beer =>
-        selectedVenues.value.includes(beer.venue)
+      selectedVenues.value.includes(beer.venue)
     )
   }
 
@@ -128,9 +128,9 @@ const showIntersectionsOnly = ref(false)
 
 // Обновляем типы подачи
 const servingTypes = [
-  {title: 'Банки/Бутылки', value: 'packaged'},
-  {title: 'Розлив', value: 'draft'},
-  {title: 'Сэмплы', value: 'sample'},
+  { title: 'Банки/Бутылки', value: 'packaged' },
+  { title: 'Розлив', value: 'draft' },
+  { title: 'Сэмплы', value: 'sample' },
 ]
 
 // Обновляем функцию определения типа подачи
@@ -144,8 +144,8 @@ const getServingType = (volume: string): string => {
 
   // Проверяем бутылки/банки
   if (volumeLower.includes('bottle') ||
-      volumeLower.includes('can') ||
-      volumeLower.includes('btl')) {
+    volumeLower.includes('can') ||
+    volumeLower.includes('btl')) {
     return 'packaged'
   }
 
@@ -157,13 +157,13 @@ const getServingType = (volume: string): string => {
 const selectedServingTypes = ref(['packaged', 'draft',])
 
 const sortByOptions = [
-  {title: 'По алкоголю', value: 'abv'},
-  {title: 'По цене', value: 'price'},
-  {title: 'По цене за литр', value: 'pricePerL'},
-  {title: 'По названию', value: 'name'},
+  { title: 'По алкоголю', value: 'abv' },
+  { title: 'По цене', value: 'price' },
+  { title: 'По цене за литр', value: 'pricePerL' },
+  { title: 'По названию', value: 'name' },
 ]
 
-const sortBy = ref<'abv' | 'price' | 'pricePerL' | 'name' | null>('pricePerL')
+const sortBy = ref<'abv' | 'price' | 'pricePerL' | 'name' | null>('price')
 
 // Обновляем список отображаемых магазинов
 const displayedVenues = computed(() => {
@@ -195,7 +195,7 @@ const filteredBeers = computed(() => {
   // Фильтрация по выбранным пивоварням
   if (selectedBreweries.value.length) {
     filtered = filtered.filter(beer =>
-        selectedBreweries.value.includes(beer.brewery)
+      selectedBreweries.value.includes(beer.brewery)
     )
   }
 
@@ -203,8 +203,8 @@ const filteredBeers = computed(() => {
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
     filtered = filtered.filter(beer =>
-        beer.name.toLowerCase().includes(query) ||
-        beer.brewery.toLowerCase().includes(query)
+      beer.name.toLowerCase().includes(query) ||
+      beer.brewery.toLowerCase().includes(query)
     )
   }
 
@@ -218,7 +218,7 @@ const filteredBeers = computed(() => {
       })));
       // Проверяем наличие выбранных типов подачи
       const hasSelectedServingType = beerPricesForVenues?.some(price =>
-          selectedServingTypes.value.includes(getServingType(price.volume))
+        selectedServingTypes.value.includes(getServingType(price.volume))
       )
 
       if (!hasSelectedServingType) {
@@ -232,38 +232,38 @@ const filteredBeers = computed(() => {
       if (showIntersectionsOnly.value) {
         return selectedVenues.value.every(venue => {
           return beerPricesForVenues?.some(price =>
-              price.venue === venue &&
-              selectedServingTypes.value.includes(getServingType(price.volume))
+            price.venue === venue &&
+            selectedServingTypes.value.includes(getServingType(price.volume))
           )
         })
       } else {
         return selectedVenues.value.some(venue => {
           return beerPricesForVenues?.some(price =>
-              price.venue === venue &&
-              selectedServingTypes.value.includes(getServingType(price.volume))
+            price.venue === venue &&
+            selectedServingTypes.value.includes(getServingType(price.volume))
           )
         })
       }
     })
-        .map(beer => ({
-          ...beer, venuePrices: beer.venuePrices!
+      .map(beer => ({
+        ...beer, venuePrices: beer.venuePrices!
 
-              // Фильтруем только выбранные магазины
-              .filter(venuePrices => selectedVenues.value.length === 0 || selectedVenues.value.includes(venuePrices.venue))
+          // Фильтруем только выбранные магазины
+          .filter(venuePrices => selectedVenues.value.length === 0 || selectedVenues.value.includes(venuePrices.venue))
 
-              // Фильтруем только выбранные типы подачи
-              .map(venuePrices => ({
-                    ...venuePrices,
-                    prices: venuePrices.prices.filter(price => selectedServingTypes.value.includes(getServingType(price.volume))),
-                  })
-              )
-        }))
+          // Фильтруем только выбранные типы подачи
+          .map(venuePrices => ({
+            ...venuePrices,
+            prices: venuePrices.prices.filter(price => selectedServingTypes.value.includes(getServingType(price.volume))),
+          })
+          )
+      }))
   }
 
   // Фильтрация по выбранным стилям
   if (selectedStyles.value.length) {
     filtered = filtered.filter(beer =>
-        selectedStyles.value.includes(beer.style)
+      selectedStyles.value.includes(beer.style)
     )
   }
 
@@ -317,180 +317,123 @@ const abvRange = ref([1, 20]);
 
 const rateRange = ref([3.5, 5]);
 
+const reveal = ref(false);
 
 </script>
 
 <template>
   <v-container>
-    <div class="search-container">
-      <v-row>
-        <v-col cols="12" class="d-flex align-center">
-          <v-text-field
-              v-model="searchQuery"
-              label="Поиск по названию или пивоварне"
-              variant="outlined"
-              clearable
-              density="comfortable"
-              class="flex-grow-1"
-              hide-details
-          />
-          <v-btn-toggle
-              v-model="displayMode"
-              mandatory
-              class="ms-4"
-          >
-            <v-btn value="table" icon="mdi-table"/>
-            <v-btn value="list" icon="mdi-format-list-bulleted"/>
-          </v-btn-toggle>
-        </v-col>
-      </v-row>
+    <h1>Цены на пивко</h1>
 
-      <v-row>
-        <v-col cols="4">
-          <div>
-            <v-autocomplete
-                v-model="selectedVenues"
-                :items="uniqueVenues"
-                chips
-                label="Выберите магазины"
-                multiple
-                variant="outlined"
-                hide-details
-                clearable
-            />
-            <v-checkbox
-                v-if="selectedVenues.length > 1"
-                v-model="showIntersectionsOnly"
-                label="Только пересечения"
-                :disabled="selectedVenues.length <= 1"
-                density="comfortable"
-                class="mt-2"
-            />
-          </div>
-        </v-col>
+    <v-card>
+      <v-card-item @click="(reveal = !reveal)" v-ripple style="cursor: pointer">
+        <v-card-title>Фильтры</v-card-title>
 
-        <v-col cols="4">
-          <v-autocomplete
-              v-model="selectedBreweries"
-              :items="allBreweryItems"
-              chips
-              label="Выберите пивоварни"
-              multiple
-              variant="outlined"
-              clearable
-          />
-        </v-col>
+        <template v-slot:append>
+          <v-btn flat icon>
+            <v-icon v-if="reveal">mdi-menu-up</v-icon>
+            <v-icon v-else>mdi-menu-down</v-icon>
+          </v-btn>
+        </template>
+      </v-card-item>
 
-        <v-col cols="4">
-          <v-autocomplete
-              v-model="selectedStyles"
-              :items="allStyleItems"
-              chips
-              label="Выберите стили"
-              multiple
-              variant="outlined"
-              clearable
-              hide-details
-          />
-          <v-checkbox
-              v-model="simplifyStyles"
-              label='Упрощенные стили ("Barleywine - American" → "Barleywine")'
-              density="comfortable"
-              class="mt-2"
-              hide-details
-          />
-        </v-col>
+      <v-expand-transition :group="true">
+        <div style="margin-top: 10px" v-if="reveal">
+          <v-card-text>
+            <v-row>
+              <v-col cols="12" class="d-flex align-center">
+                <v-text-field v-model="searchQuery" label="Поиск по названию или пивоварне" variant="outlined" clearable
+                  density="comfortable" class="flex-grow-1" hide-details />
+              </v-col>
 
-        <v-col cols="4">
-          <v-select
-              v-model="selectedServingTypes"
-              :items="servingTypes"
-              chips
-              label="Тип подачи"
-              multiple
-              variant="outlined"
-          />
-        </v-col>
+              <v-col cols="4">
+                <div>
+                  <v-autocomplete v-model="selectedVenues" :items="uniqueVenues" chips label="Выберите магазины"
+                    multiple variant="outlined" hide-details clearable />
+                  <v-checkbox v-if="selectedVenues.length > 1" v-model="showIntersectionsOnly"
+                    label="Только пересечения" :disabled="selectedVenues.length <= 1" density="comfortable"
+                    class="mt-2" />
+                </div>
+              </v-col>
 
-        <v-col cols="4">
-          <v-select
-              v-model="sortBy"
-              :items="sortByOptions"
-              label="Сортировка"
-              variant="outlined"
-          />
-        </v-col>
+              <v-col cols="4">
+                <v-autocomplete v-model="selectedBreweries" :items="allBreweryItems" chips label="Выберите пивоварни"
+                  multiple variant="outlined" clearable />
+              </v-col>
 
-        <v-col cols="4">
-          <v-checkbox
-              v-model="hideTried"
-              label='Скрыть попробованные'
-          />
-        </v-col>
+              <v-col cols="4">
+                <v-autocomplete v-model="selectedStyles" :items="allStyleItems" chips label="Выберите стили" multiple
+                  variant="outlined" clearable hide-details />
+                <v-checkbox v-model="simplifyStyles" density="comfortable" class="mt-2" hide-details>
+                  <template v-slot:label>
+                    <div>
+                      Упрощенные стили
+                      <span class="text-caption">("Lager - Pale" → "Lager")</span>
+                    </div>
+                  </template>
+                </v-checkbox>
+              </v-col>
+
+              <v-col cols="4">
+                <v-select v-model="selectedServingTypes" :items="servingTypes" chips label="Тип подачи" multiple
+                  variant="outlined" />
+              </v-col>
+
+              <v-col cols="4">
+                <v-select v-model="sortBy" :items="sortByOptions" label="Сортировка" variant="outlined" />
+              </v-col>
+
+              <v-col cols="4">
+                <v-checkbox v-model="hideTried" label='Скрыть попробованные' />
+              </v-col>
 
 
-        <v-col cols="4">
-          <v-range-slider
-              label="Алкоголь"
-              v-model="abvRange"
-              min="0"
-              max="20"
-              :step="0.1"
-              thumb-label="always"
-          ></v-range-slider>
-        </v-col>
+              <v-col cols="4" class="d-flex align-center">
+                <v-range-slider label="Алкоголь" v-model="abvRange" min="0" max="20" :step="0.1" hide-details
+                  thumb-label="always"></v-range-slider>
+              </v-col>
 
-        <v-col cols="4">
-          <v-range-slider
-              label="Рейтинг"
-              v-model="rateRange"
-              min="0"
-              max="5"
-              :step="0.1"
-              thumb-label="always"
-          ></v-range-slider>
-        </v-col>
-      </v-row>
+              <v-col cols="4" class="d-flex align-center">
+                <v-range-slider label="Рейтинг" v-model="rateRange" min="0" max="5" :step="0.1" hide-details
+                  thumb-label="always"></v-range-slider>
+              </v-col>
+
+              <v-col cols="4">
+
+                <span class="v-label mr-6">Вид</span>
+                <v-btn-toggle v-model="displayMode" mandatory>
+                  <v-btn value="list" prepend-icon="mdi-format-list-bulleted">Список</v-btn>
+                  <v-btn value="table" prepend-icon="mdi-table">Таблица</v-btn>
+                </v-btn-toggle>
+
+
+              </v-col>
+            </v-row>
+
+          </v-card-text>
+        </div>
+      </v-expand-transition>
+    </v-card>
+
+
+    <div class="mt-2">
+      <template v-if="displayMode === 'table'">
+        <BeerPricesTable :filtered-beers="filteredBeers" :displayed-venues="displayedVenues" />
+      </template>
+      <template v-else>
+
+        <v-list ref="price-list">
+          <v-virtual-scroll :items="filteredBeers" :height="reveal ? 350 : 760">
+            <template v-slot:default="{ item }">
+              <BeerListItem :beer="item" />
+            </template>
+          </v-virtual-scroll>
+        </v-list>
+
+      </template>
     </div>
-
-
-    <template v-if="displayMode === 'table'">
-      <BeerPricesTable
-          :filtered-beers="filteredBeers"
-          :displayed-venues="displayedVenues"
-      />
-    </template>
-    <template v-else>
-
-      <v-list ref="price-list">
-        <v-virtual-scroll :items="filteredBeers" height="500">
-          <template v-slot:default="{ item }">
-            <BeerListItem  :beer="item"/>
-          </template>
-        </v-virtual-scroll>
-      </v-list>
-
-    </template>
-
 
   </v-container>
 </template>
 
-<style scoped>
-/*
-.prices-container {
-  padding: 1rem;
-  overflow-x: auto;
-  position: relative;
-  max-height: calc(100vh - 2rem);
-}
-
- */
-
-.search-container {
-  margin-bottom: 1rem;
-  background-color: white;
-  padding: 1rem 0;
-  border-bottom: 1px solid #eee;
-}
-</style>
+<style scoped></style>
