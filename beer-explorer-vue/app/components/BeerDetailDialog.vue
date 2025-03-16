@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 import type { Beer } from "~/logic/beer";
+import { compPricePerL } from "~/logic/beer";
+import BeerPriceBoxPlot from "~/components/BeerPriceBoxPlot.vue";
+import BeerPriceByVenueChart from "~/components/BeerPriceByVenueChart.vue";
 
 interface Props {
   beer: Beer;
@@ -9,7 +12,7 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits(['update:isOpen']);
 
-const beerHistory = ref([]);
+const beerHistory = ref<any[]>([]);
 const isLoading = ref(false);
 
 // Следим за изменением состояния диалогового окна
@@ -32,7 +35,7 @@ const fetchBeerHistory = async () => {
       }
     });
     
-    beerHistory.value = data.value || [];
+    beerHistory.value = Array.isArray(data.value) ? data.value : [];
   } catch (error) {
     console.error('Ошибка при получении истории цен:', error);
   } finally {
@@ -50,10 +53,29 @@ onMounted(async () => {
 const closeDialog = () => {
   emit('update:isOpen', false);
 };
+
+// Активная вкладка
+const activeTab = ref(0);
+
+// Вычисляем цену за литр для отображения в таблице
+const tableItems = computed(() => {
+  if (!beerHistory.value || beerHistory.value.length === 0) {
+    return [];
+  }
+  
+  return beerHistory.value.map(item => {
+    const pricePerLiter = item.volume ? compPricePerL(item.price, item.volume) : null;
+    
+    return {
+      ...item,
+      price_per_liter: pricePerLiter !== null ? pricePerLiter.toFixed(2) : 'Н/Д'
+    };
+  });
+});
 </script>
 
 <template>
-  <v-dialog :model-value="isOpen" @update:model-value="closeDialog" max-width="800px">
+  <v-dialog :model-value="isOpen" @update:model-value="closeDialog" max-width="900px">
     <v-card>
       <v-card-title class="d-flex align-center">
         <span class="text-h5">{{ beer.name }}</span>
@@ -88,6 +110,19 @@ const closeDialog = () => {
             <div class="d-flex align-center mb-2">
               <span class="font-weight-bold mr-2">Рейтинг:</span> {{ beer.rate }}
             </div>
+            <div class="d-flex align-center mb-2">
+              <v-btn 
+                v-if="beer.url" 
+                :href="beer.url" 
+                target="_blank" 
+                prepend-icon="mdi-open-in-new"
+                variant="outlined"
+                size="small"
+                class="mt-2"
+              >
+                Открыть на Untappd
+              </v-btn>
+            </div>
           </v-col>
         </v-row>
         
@@ -99,23 +134,60 @@ const closeDialog = () => {
           v-if="isLoading"
           indeterminate
           color="primary"
-          class="ma-4"
+          class="ma-4 d-block mx-auto"
         ></v-progress-circular>
         
-        <v-data-table
-          v-else-if="beerHistory && beerHistory.length > 0"
-          :headers="[
-            { title: 'Дата', key: 'date_parsed' },
-            { title: 'Магазин', key: 'venue' },
-            { title: 'Объем', key: 'volume' },
-            { title: 'Цена', key: 'price' }
-          ]"
-          :items="beerHistory"
-          class="elevation-1"
-        ></v-data-table>
-        <div v-else class="text-center pa-4">
-          Нет данных по истории цен
-        </div>
+        <template v-else>
+          <v-tabs v-model="activeTab" bg-color="primary">
+            <v-tab value="0">График по дням</v-tab>
+            <v-tab value="1">График по магазинам</v-tab>
+            <v-tab value="2">Таблица</v-tab>
+          </v-tabs>
+          
+          <v-window v-model="activeTab">
+            <v-window-item value="0">
+              <div class="pa-4">
+                <BeerPriceBoxPlot :history-data="beerHistory" />
+              </div>
+            </v-window-item>
+            
+            <v-window-item value="1">
+              <div class="pa-4">
+                <BeerPriceByVenueChart :history-data="beerHistory" />
+              </div>
+            </v-window-item>
+            
+            <v-window-item value="2">
+              <v-data-table
+                v-if="beerHistory && beerHistory.length > 0"
+                :headers="[
+                  { title: 'Дата', key: 'date_parsed' },
+                  { title: 'Магазин', key: 'venue' },
+                  { title: 'Объем', key: 'volume' },
+                  { title: 'Цена', key: 'price', align: 'end' },
+                  { title: 'Цена за литр', key: 'price_per_liter', align: 'end' }
+                ]"
+                :items="tableItems"
+                class="elevation-1"
+                :items-per-page="10"
+                :footer-props="{
+                  'items-per-page-options': [10, 20, 50, -1],
+                  'items-per-page-text': 'Строк на странице'
+                }"
+              >
+                <template v-slot:item.price="{ item }">
+                  {{ item.price }} ₽
+                </template>
+                <template v-slot:item.price_per_liter="{ item }">
+                  {{ item.price_per_liter }} ₽/л
+                </template>
+              </v-data-table>
+              <div v-else class="text-center pa-4">
+                Нет данных по истории цен
+              </div>
+            </v-window-item>
+          </v-window>
+        </template>
       </v-card-text>
     </v-card>
   </v-dialog>
