@@ -16,12 +16,30 @@ const stars = computed(() => Array.from({length: Math.round(props.beer.rate)}, (
 
 <template>
   <v-list-item
-      :href="beer.url"
-      target="_blank"
   >
     <template v-slot:append>
-      <v-list-item-action class="flex-column align-end">
-        <v-icon   color="success" size="x-small" v-if="beer.tried">mdi-check</v-icon>
+      <v-list-item-action>
+        <v-btn flat size="x-small"
+               icon :readonly="true">
+          <v-icon color="success" size="x-small" v-if="beer.tried">mdi-check</v-icon>
+        </v-btn>
+      </v-list-item-action>
+      <v-list-item-action>
+        <v-btn flat size="x-small"
+               icon
+
+        >
+          <v-icon>mdi-chart-bar</v-icon>
+        </v-btn>
+      </v-list-item-action>
+      <v-list-item-action>
+        <v-btn flat size="x-small"
+               icon
+               :href="beer.url"
+               target="_blank"
+        >
+          <v-icon>mdi-open-in-new</v-icon>
+        </v-btn>
       </v-list-item-action>
     </template>
 
@@ -35,6 +53,7 @@ const stars = computed(() => Array.from({length: Math.round(props.beer.rate)}, (
           class="mr-4"
       />
     </template>
+
 
     <template v-slot:title>
       <div>
