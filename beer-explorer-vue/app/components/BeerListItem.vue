@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 
 import {type Beer, compPricePerL, parseVolumeToL} from "~/logic/beer";
+import BeerDetailDialog from "~/components/BeerDetailDialog.vue";
 
 interface Props {
   beer: Beer;
@@ -11,6 +12,13 @@ const props = defineProps<Props>()
 // array of stars
 const stars = computed(() => Array.from({length: Math.round(props.beer.rate)}, (_, __) => "⭐").join(""))
 
+// Состояние для управления диалоговым окном
+const isDialogOpen = ref(false);
+
+// Функция для открытия диалогового окна
+const openBeerDetailDialog = () => {
+  isDialogOpen.value = true;
+};
 
 </script>
 
@@ -27,7 +35,7 @@ const stars = computed(() => Array.from({length: Math.round(props.beer.rate)}, (
       <v-list-item-action>
         <v-btn flat size="x-small"
                icon
-
+               @click="openBeerDetailDialog"
         >
           <v-icon>mdi-chart-bar</v-icon>
         </v-btn>
@@ -79,4 +87,11 @@ const stars = computed(() => Array.from({length: Math.round(props.beer.rate)}, (
     </template>
 
   </v-list-item>
+  
+  <!-- Компонент диалогового окна -->
+  <BeerDetailDialog 
+    :beer="beer" 
+    :is-open="isDialogOpen" 
+    @update:is-open="isDialogOpen = $event"
+  />
 </template>
