@@ -3,6 +3,18 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 
 
+def parse_name(name: str, brewery: str):
+    """
+    >>> parse_name("Сидр Заповедник Black Currant Friday 0,33 бут.", "Заповедник")
+    ('Black Currant Friday', '0,33 бут.')
+    >>> parse_name("Af Brew Chori Chori Chupke Chupke 0,45 бан.", "Af Brew")
+    ('Chori Chori Chupke Chupke', '0,45 бан.')
+    >>> parse_name("Af Brew Zero-Zero Takeoff 1 0,33 бан., б/а", "Af Brew")
+    ('Zero-Zero Takeoff 1', '0,33 бан.')
+    """
+    ...
+
+
 def parse_and_save_beers(html: str, shop: str, sqlite_connection):
     """
     Парсит HTML-страницу с пивом из магазина и сохраняет данные в SQLite.
@@ -107,15 +119,14 @@ def parse_and_save_beers(html: str, shop: str, sqlite_connection):
 
 
 if __name__ == "__main__":
-    # shop = ("Ул. Пивченкова, 7", "beruvyhodnoy_32.html")
-    # shop_name, shop_html = ("Проспект Мира, 79", "beruvyhodnoy_14.html")
-    shop_name, shop_html = ("ул. Строителей 7к1", "beruvyhodnoy_29.html")
-
-    # Пример использования
-    # with open(, "r", encoding="utf-8") as f:
-    with open(shop_html, "r", encoding="utf-8") as f:
-        html = f.read()
+    shops = [
+        ("Проспект Мира, 79", "beruvyhodnoy_14.html"),
+        ("ул. Строителей 7к1", "beruvyhodnoy_29.html"),
+        ("ул. Пивченкова, 7", "beruvyhodnoy_32.html"),
+    ]
 
     with sqlite3.connect("../beer.db") as conn:
-        parse_and_save_beers(html, shop_name, conn)
-    pass
+        for shop_name, shop_html in shops:
+            with open(shop_html, "r", encoding="utf-8") as f:
+                html = f.read()
+                parse_and_save_beers(html, shop_name, conn)

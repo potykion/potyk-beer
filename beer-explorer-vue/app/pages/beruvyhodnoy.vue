@@ -57,19 +57,26 @@ const selectedCountries = ref<string[]>(["Россия"])
 const selectedBreweries = ref<string[]>([])
 const selectedStyles = ref<string[]>([])
 
-// Получаем уникальные страны
+// Получаем уникальные страны с количеством позиций
 const countries = computed(() => {
-  const uniqueCountries = new Set<string>()
-  beers.value.forEach(beer => uniqueCountries.add(beer.country))
-  return Array.from(uniqueCountries).sort().map(country => ({
-    title: country,
-    value: country
-  }))
+  const countryCounts = new Map<string, number>()
+  
+  beers.value.forEach(beer => {
+    const count = countryCounts.get(beer.country) || 0
+    countryCounts.set(beer.country, count + 1)
+  })
+  
+  return Array.from(countryCounts.entries())
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([country, count]) => ({
+      title: `${country} (${count})`,
+      value: country
+    }))
 })
 
-// Получаем уникальные пивоварни с учетом выбранных стран
+// Получаем уникальные пивоварни с учетом выбранных стран и с количеством позиций
 const breweries = computed(() => {
-  const uniqueBreweries = new Set<string>()
+  const breweryCounts = new Map<string, number>()
   
   // Фильтруем пиво по выбранным странам (если они выбраны)
   let filteredBeers = beers.value
@@ -78,17 +85,22 @@ const breweries = computed(() => {
   }
   
   // Собираем пивоварни из отфильтрованного списка
-  filteredBeers.forEach(beer => uniqueBreweries.add(beer.brewery))
+  filteredBeers.forEach(beer => {
+    const count = breweryCounts.get(beer.brewery) || 0
+    breweryCounts.set(beer.brewery, count + 1)
+  })
   
-  return Array.from(uniqueBreweries).sort().map(brewery => ({
-    title: brewery,
-    value: brewery
-  }))
+  return Array.from(breweryCounts.entries())
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([brewery, count]) => ({
+      title: `${brewery} (${count})`,
+      value: brewery
+    }))
 })
 
-// Получаем уникальные стили с учетом выбранных стран и пивоварен
+// Получаем уникальные стили с учетом выбранных стран и пивоварен и с количеством позиций
 const styles = computed(() => {
-  const uniqueStyles = new Set<string>()
+  const styleCounts = new Map<string, number>()
   
   // Фильтруем пиво по выбранным странам и пивоварням (если они выбраны)
   let filteredBeers = beers.value
@@ -102,12 +114,17 @@ const styles = computed(() => {
   }
   
   // Собираем стили из отфильтрованного списка
-  filteredBeers.forEach(beer => uniqueStyles.add(beer.style))
+  filteredBeers.forEach(beer => {
+    const count = styleCounts.get(beer.style) || 0
+    styleCounts.set(beer.style, count + 1)
+  })
   
-  return Array.from(uniqueStyles).sort().map(style => ({
-    title: style,
-    value: style
-  }))
+  return Array.from(styleCounts.entries())
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([style, count]) => ({
+      title: `${style} (${count})`,
+      value: style
+    }))
 })
 
 // Фильтрованный список пива
