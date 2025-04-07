@@ -108,7 +108,8 @@ def parse_and_save_beers(html: str, shop: str, sqlite_connection):
 
 if __name__ == "__main__":
     # shop = ("Ул. Пивченкова, 7", "beruvyhodnoy_32.html")
-    shop_name, shop_html = ("Проспект Мира, 79", "beruvyhodnoy_14.html")
+    # shop_name, shop_html = ("Проспект Мира, 79", "beruvyhodnoy_14.html")
+    shop_name, shop_html = ("ул. Строителей 7к1", "beruvyhodnoy_29.html")
 
     # Пример использования
     # with open(, "r", encoding="utf-8") as f:

@@ -53,7 +53,7 @@ function getPrice(beer: Beer, shop: Shop) {
 }
 
 // Фильтры
-const selectedCountries = ref<string[]>([])
+const selectedCountries = ref<string[]>(["Россия"])
 const selectedBreweries = ref<string[]>([])
 const selectedStyles = ref<string[]>([])
 
@@ -67,20 +67,43 @@ const countries = computed(() => {
   }))
 })
 
-// Получаем уникальные пивоварни
+// Получаем уникальные пивоварни с учетом выбранных стран
 const breweries = computed(() => {
   const uniqueBreweries = new Set<string>()
-  beers.value.forEach(beer => uniqueBreweries.add(beer.brewery))
+  
+  // Фильтруем пиво по выбранным странам (если они выбраны)
+  let filteredBeers = beers.value
+  if (selectedCountries.value.length > 0) {
+    filteredBeers = filteredBeers.filter(beer => selectedCountries.value.includes(beer.country))
+  }
+  
+  // Собираем пивоварни из отфильтрованного списка
+  filteredBeers.forEach(beer => uniqueBreweries.add(beer.brewery))
+  
   return Array.from(uniqueBreweries).sort().map(brewery => ({
     title: brewery,
     value: brewery
   }))
 })
 
-// Получаем уникальные стили
+// Получаем уникальные стили с учетом выбранных стран и пивоварен
 const styles = computed(() => {
   const uniqueStyles = new Set<string>()
-  beers.value.forEach(beer => uniqueStyles.add(beer.style))
+  
+  // Фильтруем пиво по выбранным странам и пивоварням (если они выбраны)
+  let filteredBeers = beers.value
+  
+  if (selectedCountries.value.length > 0) {
+    filteredBeers = filteredBeers.filter(beer => selectedCountries.value.includes(beer.country))
+  }
+  
+  if (selectedBreweries.value.length > 0) {
+    filteredBeers = filteredBeers.filter(beer => selectedBreweries.value.includes(beer.brewery))
+  }
+  
+  // Собираем стили из отфильтрованного списка
+  filteredBeers.forEach(beer => uniqueStyles.add(beer.style))
+  
   return Array.from(uniqueStyles).sort().map(style => ({
     title: style,
     value: style
@@ -132,7 +155,7 @@ const showFilters = ref(false)
             <v-card-text>
               <v-row>
                 <v-col cols="4">
-                  <v-select 
+                  <v-autocomplete
                     v-model="selectedCountries" 
                     :items="countries" 
                     chips 
@@ -144,7 +167,7 @@ const showFilters = ref(false)
                 </v-col>
                 
                 <v-col cols="4">
-                  <v-select 
+                  <v-autocomplete
                     v-model="selectedBreweries" 
                     :items="breweries" 
                     chips 
@@ -156,7 +179,7 @@ const showFilters = ref(false)
                 </v-col>
                 
                 <v-col cols="4">
-                  <v-select 
+                  <v-autocomplete
                     v-model="selectedStyles" 
                     :items="styles" 
                     chips 
