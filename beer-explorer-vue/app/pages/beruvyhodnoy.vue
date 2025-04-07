@@ -51,12 +51,129 @@ function getPrice(beer: Beer, shop: Shop) {
   const key = `${beer.name}|${shop.shop}`
   return prices.value.get(key) || null
 }
+
+// Фильтры
+const selectedCountries = ref<string[]>([])
+const selectedBreweries = ref<string[]>([])
+const selectedStyles = ref<string[]>([])
+
+// Получаем уникальные страны
+const countries = computed(() => {
+  const uniqueCountries = new Set<string>()
+  beers.value.forEach(beer => uniqueCountries.add(beer.country))
+  return Array.from(uniqueCountries).sort().map(country => ({
+    title: country,
+    value: country
+  }))
+})
+
+// Получаем уникальные пивоварни
+const breweries = computed(() => {
+  const uniqueBreweries = new Set<string>()
+  beers.value.forEach(beer => uniqueBreweries.add(beer.brewery))
+  return Array.from(uniqueBreweries).sort().map(brewery => ({
+    title: brewery,
+    value: brewery
+  }))
+})
+
+// Получаем уникальные стили
+const styles = computed(() => {
+  const uniqueStyles = new Set<string>()
+  beers.value.forEach(beer => uniqueStyles.add(beer.style))
+  return Array.from(uniqueStyles).sort().map(style => ({
+    title: style,
+    value: style
+  }))
+})
+
+// Фильтрованный список пива
+const filteredBeers = computed(() => {
+  let filtered = beers.value
+  
+  if (selectedCountries.value.length > 0) {
+    filtered = filtered.filter(beer => selectedCountries.value.includes(beer.country))
+  }
+  
+  if (selectedBreweries.value.length > 0) {
+    filtered = filtered.filter(beer => selectedBreweries.value.includes(beer.brewery))
+  }
+  
+  if (selectedStyles.value.length > 0) {
+    filtered = filtered.filter(beer => selectedStyles.value.includes(beer.style))
+  }
+  
+  return filtered
+})
+
+// Состояние для управления отображением фильтров
+const showFilters = ref(false)
 </script>
 
 <template>
   <div class="beruvyhodnoy-container">
     <h1>Цены на пиво в "Беру Выходной"</h1>
     
+    <!-- Фильтры -->
+    <div class="filters-container">
+      <v-card>
+        <v-card-item @click="showFilters = !showFilters" style="cursor: pointer">
+          <v-card-title>Фильтры</v-card-title>
+          <template v-slot:append>
+            <v-btn flat icon>
+              <v-icon v-if="showFilters">mdi-menu-up</v-icon>
+              <v-icon v-else>mdi-menu-down</v-icon>
+            </v-btn>
+          </template>
+        </v-card-item>
+        
+        <v-expand-transition>
+          <div v-if="showFilters">
+            <v-card-text>
+              <v-row>
+                <v-col cols="4">
+                  <v-select 
+                    v-model="selectedCountries" 
+                    :items="countries" 
+                    chips 
+                    label="Страна" 
+                    multiple 
+                    variant="outlined"
+                    clearable
+                  />
+                </v-col>
+                
+                <v-col cols="4">
+                  <v-select 
+                    v-model="selectedBreweries" 
+                    :items="breweries" 
+                    chips 
+                    label="Пивоварня" 
+                    multiple 
+                    variant="outlined"
+                    clearable
+                  />
+                </v-col>
+                
+                <v-col cols="4">
+                  <v-select 
+                    v-model="selectedStyles" 
+                    :items="styles" 
+                    chips 
+                    label="Стиль" 
+                    multiple 
+                    variant="outlined"
+                    clearable
+                  />
+                </v-col>
+              </v-row>
+            </v-card-text>
+          </div>
+        </v-expand-transition>
+      </v-card>
+    </div>
+    
+    <!-- Таблица с ценами -->
     <div class="table-container">
       <table class="beer-table">
         <thead>
@@ -68,7 +185,7 @@ function getPrice(beer: Beer, shop: Shop) {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="beer in beers" :key="beer.name">
+          <tr v-for="beer in filteredBeers" :key="beer.name">
             <td class="beer-info">
               <div class="beer-name">{{ beer.name }}</div>
               <div class="beer-details">
@@ -101,9 +218,14 @@ h1 {
   font-size: 24px;
 }
 
+.filters-container {
+  margin-bottom: 20px;
+}
+
 .table-container {
   overflow-x: auto;
   width: 100%;
+  margin-top: 20px;
 }
 
 .beer-table {
